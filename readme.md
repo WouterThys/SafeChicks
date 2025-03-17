@@ -24,8 +24,13 @@ Chicks need to be safe so make door go brrrr.
 DIY chicken door:
 https://davenaves.com/blog/interests-projects/chickens/chicken-coop/arduino-chicken-door/#
 
-## FSM
+
+## Measurements
+
+### POC Arduino Uno (17/03 16:20)
+  - added 4[Ohm] resistor between 12V supply
+  - Idle ~140mV => 4,9 mW
+  - Run  ~1,30V => 423 mW
 
 
 
-Under the markdown

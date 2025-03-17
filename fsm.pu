@@ -2,26 +2,26 @@
 
 note "When daytime:\n -> D=1, Su=1, Sd=0\n\nWhen nighttime:\n -> D=0,Su=0,Sd=1" as N1
 
-
-
 Sleep : sleep 5 min
+MotorStop : stop motor
+MotorRun : start motor up/down
+MotorCheck : day -> upper sensor should be on
+MotorCheck : night -> bottom sensor should be on
 
 [*] --> Sensor
 Sensor : Store sensor values in state
 Sensor : Sanity check sensor values
 
-Sensor --> SensorMath
-SensorMath --> Sleep : day/night **not** changed
+Sensor --> Sleep : day/night **not** changed
 Sleep --> Sensor : Wake up
-Sensor --> Door : day/night **changed**
+Sensor --> MotorRun : **changed**
 
-Door --> MotorUp : Day = 1
-MotorUp --> MotorUp : Su = 0
-MotorUp --> Sensor : Su = 1 (Sd = 0)
+MotorRun --> MotorCheck
 
-Door --> MotorDown : Day = 0
-MotorDown --> MotorDown : Sd = 0
-MotorDown --> Sensor : Sd = 1 (Su = 0)
+MotorCheck --> MotorCheck : sensor **not** end
+MotorCheck --> MotorStop : sensor **end**
+
+MotorStop --> Sensor
 
 		
 @enduml
