@@ -1,0 +1,27 @@
+@startuml FSM
+
+note "When daytime:\n -> D=1, Su=1, Sd=0\n\nWhen nighttime:\n -> D=0,Su=0,Sd=1" as N1
+
+
+
+Sleep : sleep 5 min
+
+[*] --> Sensor
+Sensor : Store sensor values in state
+Sensor : Sanity check sensor values
+
+Sensor --> SensorMath
+SensorMath --> Sleep : day/night **not** changed
+Sleep --> Sensor : Wake up
+Sensor --> Door : day/night **changed**
+
+Door --> MotorUp : Day = 1
+MotorUp --> MotorUp : Su = 0
+MotorUp --> Sensor : Su = 1 (Sd = 0)
+
+Door --> MotorDown : Day = 0
+MotorDown --> MotorDown : Sd = 0
+MotorDown --> Sensor : Sd = 1 (Su = 0)
+
+		
+@enduml
