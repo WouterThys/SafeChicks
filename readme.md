@@ -24,6 +24,12 @@ Chicks need to be safe so make door go brrrr.
 DIY chicken door:
 https://davenaves.com/blog/interests-projects/chickens/chicken-coop/arduino-chicken-door/#
 
+Battery management system
+https://www.dfrobot.com/product-1714.html
+
+Arduino low power
+https://docs.arduino.cc/learn/electronics/low-power/
+
 
 ## Measurements
 

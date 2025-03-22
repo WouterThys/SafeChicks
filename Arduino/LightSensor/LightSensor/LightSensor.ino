@@ -1,4 +1,4 @@
-//#include "ArduinoLowPower.h"
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -8,6 +8,9 @@ void setup() {
 
   // initialize serial communication at 9600 bits per second:
   Serial.begin(9600);
+  delay(2*1000); // 2 sec
+  while (!Serial); // Wait for Serial to initialize
+  Serial.println("Setup done!");
 }
 
 void loop() {
@@ -20,6 +23,7 @@ void loop() {
   Serial.println(value1);
   Serial.println(value2);
   Serial.println();
+  Serial.flush();
 
   delay(2*1000); // 2 sec
   //sleep(5);

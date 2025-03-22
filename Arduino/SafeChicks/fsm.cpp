@@ -1,6 +1,10 @@
 #include "fsm.h"
 #include "motor.h"
-#include "pinout.h"
+#include "config.h"
+
+#include <ArduinoLowPower.h>
+#include <ArduinoJson.h>
+#include <string>
 
 // Private stuff -----------------------------------------------------------------------------
 
@@ -20,80 +24,153 @@ struct Fsm
   State next;     // Next state
 
   // Day/Night parameters
-  bool day;         // True for daytime, false for nighttime
   uint8_t dayCount; // Helper for hysteresis
 
   // Sleep parameters
   uint16_t sleepCount; // Counter keeping how long we are sleeping
 
+  // Motor parameters
+  uint16_t motorRunningCount;// Counter keeping how long the motor was running
+
   // Sensor values
   uint16_t lSensorValue; // Value of the light sensor
-  bool uSensorValue; // Value of the upper sensor
-  bool bSensorValue; // Value of the bottom sensor
+  bool uSensorClosed; // Value of the upper sensor, True when the sensor is closed
+  bool bSensorClosed; // Value of the bottom sensor, True when the sensor is closed
+
+  // Error
+  uint16_t error; // Last found error value
+
+  // Helpers
+
+  /* It is day */
+  bool isDay() 
+  {
+    return dayCount >= THR_DN_COUNT;
+  }
+
+  /* It is night */
+  bool isNight() 
+  {
+    return dayCount == 0;
+  }
+
+  /* The door is open */
+  bool isDoorOpen() 
+  {
+    return uSensorClosed;
+  }
+
+  /* The door is closed */
+  bool isDoorClosed() 
+  {
+    return bSensorClosed;
+  }
+
 };
 
 Fsm fsm;
 
-void print_state(enum State state)
+const char* print_state(enum State state)
 {
   switch (state)
   {
   case State::Sensor:
-    Serial.println("Sensor");
+    return ("Sensor");
     break;
   case State::Sleep:
-    Serial.println("Sleep");
+    return ("Sleep");
     break;
   case State::MotorRun:
-    Serial.println("MotorRun");
+    return ("MotorRun");
     break;
   case State::MotorCheck:
-    Serial.println("MotorCheck");
+    return ("MotorCheck");
     break;
   case State::MotorStop:
-    Serial.println("MotorStop");
+    return ("MotorStop");
     break;
   default:
-    Serial.println("UNKNOWN STATE");
+    return ("UNKNOWN STATE");
     break;
   }
 }
 
 void debug(Fsm &fsm)
 {
-  Serial.println("--- FSM STATE ---");
-  Serial.print(" - epoch: ");
-  Serial.println(fsm.epoch);
-  Serial.print(" - state: ");
-  print_state(fsm.state);
-  Serial.print(" - next: ");
-  print_state(fsm.next);
-  Serial.print(" - day: ");
-  Serial.println(fsm.day);
-  Serial.print(" - dayCount: ");
-  Serial.println(fsm.dayCount);
-  Serial.print(" - sleepCount: ");
-  Serial.print(fsm.sleepCount);
-  Serial.println("s");
-  Serial.print(" - lSensorValue: ");
-  Serial.println(fsm.lSensorValue);
-  Serial.print(" - uSensorValue: ");
-  Serial.println(fsm.uSensorValue);
-  Serial.print(" - bSensorValue: ");
-  Serial.println(fsm.bSensorValue);
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+  digitalWrite(PIN_ERROR_STATE, fsm.error > 0 ? HIGH : LOW);
+  digitalWrite(PIN_DAY_STATE, fsm.isDay() ? HIGH : LOW);
 
-  Serial.println("");
+  if (DEBUG_ENABLED) 
+  {
+    // Allocate the JSON document
+    JsonDocument doc;
+
+    // Add values in the document
+    doc["epoch"] = fsm.epoch;
+    doc["state"] = print_state(fsm.state);
+    doc["next"] = print_state(fsm.next);
+    doc["day"] = fsm.isDay();
+    doc["dayCount"] = fsm.dayCount;
+    doc["sleepCount"] = fsm.sleepCount;
+    doc["motorRunningCount"] = fsm.motorRunningCount;
+    doc["lSensorValue"] = fsm.lSensorValue;
+    doc["uSensorClosed"] = fsm.uSensorClosed;
+    doc["bSensorClosed"] = fsm.bSensorClosed;
+    doc["error"] = fsm.error;
+
+    serializeJson(doc, Serial1);
+    Serial1.print("\n");
+    Serial1.flush(); // Flush because we are going to sleep soon
+  }
+}
+
+void sanity_check(Fsm &fsm) 
+{
+  fsm.error = 0;
+
+  // Bot sensors cannot be on
+  if (fsm.isDoorOpen() && fsm.isDoorClosed()) 
+  {
+    fsm.error = ERROR_SENSORS_BOTH_CLOSED;
+  }
+  if (fsm.isDoorOpen() && fsm.isNight()) 
+  {
+    fsm.error |= ERROR_SENSORS_UP_WHILE_NIGHT;
+  }
+  if (fsm.isDoorClosed() && fsm.isDay()) 
+  {
+    fsm.error |= ERROR_SENSORS_DOWN_WHILE_DAY;
+  }
+  if (fsm.motorRunningCount >= THR_MOTOR_RUN) 
+  {
+    // It is back ok..
+    if ((fsm.isDoorOpen() && fsm.isDay()) ||
+        (fsm.isDoorClosed() && fsm.isNight()))
+    {
+      // Clear
+      fsm.motorRunningCount = 0;
+    }
+
+    // Set error at least once, if cleared will not show again
+    fsm.error |= ERROR_MOTOR_RUN_TOO_LONG;
+  }
+
 }
 
 void read_input(Fsm &fsm)
 {
   fsm.lSensorValue = analogRead(PIN_LSENSOR);
-  fsm.uSensorValue = digitalRead(PIN_USENSOR);
-  fsm.bSensorValue = digitalRead(PIN_BSENSOR);
+  fsm.uSensorClosed = digitalRead(PIN_USENSOR) == LOW;
+  fsm.bSensorClosed = digitalRead(PIN_BSENSOR) == LOW;
+
+  sanity_check(fsm);
+  debug(fsm);
 }
 
 void state_Sensor(Fsm &fsm)
 {
+  bool day = fsm.isDay();
   bool changed = false;
 
   /* Handle state */
@@ -104,8 +181,7 @@ void state_Sensor(Fsm &fsm)
     {
       // Counted enough nighttime values -> update
       // Note: we get here all the time so only set changed flag when needed
-      changed = fsm.day; // When day was true this will set changed
-      fsm.day = false;
+      changed = day; // When day was true this will set changed
     }
     else
     {
@@ -120,8 +196,7 @@ void state_Sensor(Fsm &fsm)
     {
       // Counted enough daytime values -> update
       // Note: we get here all the time so only set changed flag when needed
-      changed = !fsm.day;
-      fsm.day = true;
+      changed = !day;
     }
     else
     {
@@ -144,10 +219,8 @@ void state_Sensor(Fsm &fsm)
 void state_Sleep(Fsm &fsm)
 {
   /* Handle state */
-  if (fsm.epoch % 100 == 0)
-  {
-    fsm.sleepCount++;
-  }
+  LowPower.deepSleep(SLEEP_TIME_MS);
+  fsm.sleepCount++;
 
   /* Decide on next state */
   if (fsm.sleepCount >= THR_SLEEP_COUNT)
@@ -166,7 +239,10 @@ void state_Sleep(Fsm &fsm)
 void state_MotorRun(Fsm &fsm)
 {
   /* Handle state */
-  if (fsm.day)
+  
+  fsm.motorRunningCount = 0;
+
+  if (fsm.isDay())
   {
     motor_start(Direction::Up);
   }
@@ -182,17 +258,13 @@ void state_MotorRun(Fsm &fsm)
 void state_MotorCheck(Fsm &fsm)
 {
   /* Handle state */
-  // Nothing to do, motor should be running
+  fsm.motorRunningCount++;
 
   /* Decide on next state */
-  if (fsm.day && fsm.uSensorValue == 0)
+  if ((fsm.isDay() && fsm.isDoorOpen()) ||   // Opening door, upper sensor sees the door!
+      (fsm.isNight() && fsm.isDoorClosed()) ||   // Closing door, bottom sensor sees the door!
+      (fsm.motorRunningCount > THR_MOTOR_RUN)) // This is taking too long
   {
-    // Upper sensor sees the door!
-    fsm.next = State::MotorStop;
-  }
-  else if (!fsm.day && fsm.bSensorValue == 0)
-  {
-    // Bottom sensor sees the door!
     fsm.next = State::MotorStop;
   }
   else
@@ -236,18 +308,29 @@ void state_execute(Fsm &fsm)
 
 void fsm_setup()
 {
+  if (DEBUG_ENABLED) 
+  {
+    Serial.begin(9600);
+    Serial1.begin(9600);
+  }
+
   // Pin control
-  pinMode(PIN_LSENSOR, INPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(PIN_DAY_STATE, OUTPUT);
+  pinMode(PIN_ERROR_STATE, OUTPUT);
   pinMode(PIN_USENSOR, INPUT);
   pinMode(PIN_BSENSOR, INPUT);
 
   // Setup the state
   fsm.state = State::Sensor;
   fsm.next = State::Sensor;
-  fsm.day = false;
+  fsm.dayCount = THR_DN_COUNT; // Probably install while day? 
+  fsm.sleepCount = 0;
+  fsm.motorRunningCount = 0;
   fsm.lSensorValue = 0;
-  fsm.uSensorValue = 0;
-  fsm.bSensorValue = 0;
+  fsm.uSensorClosed = false;
+  fsm.bSensorClosed = false;
+  fsm.error = 0;
 }
 
 /* Run the FSM one time */
@@ -259,9 +342,5 @@ void fsm_tick()
   read_input(fsm);
   state_execute(fsm);
 
-  // Debug every 5s or when state changed
-  if (/*fsm.epoch % 500 == 0 || */ fsm.state != fsm.next)
-  {
-    debug(fsm);
-  }
+  delay(FSM_PERIOD_MS);
 }

@@ -1,5 +1,5 @@
 #include "motor.h"
-#include "pinout.h"
+#include "config.h"
 
 // Private stuff -----------------------------------------------------------------------------
 

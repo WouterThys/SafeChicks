@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MOTOR_H
+#define _MOTOR_H
 
 /* This file contains all the motor functions */
 
@@ -22,3 +23,4 @@ void motor_start(Direction d);
  */
 void motor_stop();
 
+#endif _MOTOR_H
