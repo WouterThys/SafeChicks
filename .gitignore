@@ -1,0 +1,3 @@
+*.lck
+/PCB/safe_chicks/safe_chicks-backups/*
+/SensorLogs/*.txt

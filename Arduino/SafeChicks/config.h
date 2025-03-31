@@ -11,8 +11,10 @@ const uint8_t   PIN_MOTOR_PWM = 3; // Pin for motor PWM
 const uint8_t   PIN_MOTOR_DIR = 2; // Pin for motor direction
 
 const uint8_t   PIN_LSENSOR = A0; // Pin for reading light sensor
-const uint8_t   PIN_USENSOR = 8; // Pin for reading upper door sensor
-const uint8_t   PIN_BSENSOR = 7; // Pin for reading bottom door sensor
+const uint8_t   PIN_BSENSOR = A1; // Pin for reading battery sensor
+const uint8_t   PIN_USWITCH = 8; // Pin for reading upper door sensor // !!!!! switched to 7 in schematic
+const uint8_t   PIN_BSWITCH = 7; // Pin for reading bottom door sensor // !!!!! switched to 8 in schematic
+const uint8_t   PIN_NOSLEEP = 6; // When this pin is up, don't sleep (and keep COMx open)
 
 const uint8_t   PIN_DAY_STATE = 4; // Pin to connect to LED indicating day / night
 const uint8_t   PIN_ERROR_STATE = 5; // Pin to connect to LED indicating error
@@ -20,7 +22,7 @@ const uint8_t   PIN_ERROR_STATE = 5; // Pin to connect to LED indicating error
 const uint8_t   ERROR_SENSORS_BOTH_CLOSED = 1;
 const uint8_t   ERROR_SENSORS_UP_WHILE_NIGHT = 2;
 const uint8_t   ERROR_SENSORS_DOWN_WHILE_DAY = 4;
-const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 4;
+const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 
 /* And a lot more after a while.... */ 
 

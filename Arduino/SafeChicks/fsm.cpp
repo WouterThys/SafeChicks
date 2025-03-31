@@ -24,6 +24,7 @@ struct Fsm
   State next;     // Next state
 
   // Day/Night parameters
+  bool day; // Flag to set if day
   uint8_t dayCount; // Helper for hysteresis
 
   // Sleep parameters
@@ -34,6 +35,7 @@ struct Fsm
 
   // Sensor values
   uint16_t lSensorValue; // Value of the light sensor
+  uint16_t bSensorValue; // Battery sensor
   bool uSensorClosed; // Value of the upper sensor, True when the sensor is closed
   bool bSensorClosed; // Value of the bottom sensor, True when the sensor is closed
 
@@ -45,13 +47,13 @@ struct Fsm
   /* It is day */
   bool isDay() 
   {
-    return dayCount >= THR_DN_COUNT;
+    return day;
   }
 
   /* It is night */
   bool isNight() 
   {
-    return dayCount == 0;
+    return !day;
   }
 
   /* The door is open */
@@ -115,6 +117,7 @@ void debug(Fsm &fsm)
     doc["sleepCount"] = fsm.sleepCount;
     doc["motorRunningCount"] = fsm.motorRunningCount;
     doc["lSensorValue"] = fsm.lSensorValue;
+    doc["bSensorValue"] = fsm.bSensorValue;
     doc["uSensorClosed"] = fsm.uSensorClosed;
     doc["bSensorClosed"] = fsm.bSensorClosed;
     doc["error"] = fsm.error;
@@ -161,8 +164,9 @@ void sanity_check(Fsm &fsm)
 void read_input(Fsm &fsm)
 {
   fsm.lSensorValue = analogRead(PIN_LSENSOR);
-  fsm.uSensorClosed = digitalRead(PIN_USENSOR) == LOW;
-  fsm.bSensorClosed = digitalRead(PIN_BSENSOR) == LOW;
+  fsm.bSensorValue = analogRead(PIN_BSENSOR);
+  fsm.uSensorClosed = digitalRead(PIN_USWITCH) == LOW;
+  fsm.bSensorClosed = digitalRead(PIN_BSWITCH) == LOW;
 
   sanity_check(fsm);
   debug(fsm);
@@ -170,7 +174,6 @@ void read_input(Fsm &fsm)
 
 void state_Sensor(Fsm &fsm)
 {
-  bool day = fsm.isDay();
   bool changed = false;
 
   /* Handle state */
@@ -181,7 +184,8 @@ void state_Sensor(Fsm &fsm)
     {
       // Counted enough nighttime values -> update
       // Note: we get here all the time so only set changed flag when needed
-      changed = day; // When day was true this will set changed
+      changed = fsm.day; // When day was true this will set changed
+      fsm.day = false;
     }
     else
     {
@@ -196,7 +200,8 @@ void state_Sensor(Fsm &fsm)
     {
       // Counted enough daytime values -> update
       // Note: we get here all the time so only set changed flag when needed
-      changed = !day;
+      changed = !fsm.day;
+      fsm.day = true;
     }
     else
     {
@@ -219,7 +224,15 @@ void state_Sensor(Fsm &fsm)
 void state_Sleep(Fsm &fsm)
 {
   /* Handle state */
-  LowPower.deepSleep(SLEEP_TIME_MS);
+  if (digitalRead(PIN_NOSLEEP) == LOW) 
+  {
+    LowPower.deepSleep(SLEEP_TIME_MS);
+  }
+  else 
+  {
+    Serial.println("ping");
+    delay(10000);
+  }
   fsm.sleepCount++;
 
   /* Decide on next state */
@@ -318,8 +331,12 @@ void fsm_setup()
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(PIN_DAY_STATE, OUTPUT);
   pinMode(PIN_ERROR_STATE, OUTPUT);
-  pinMode(PIN_USENSOR, INPUT);
+  
+  pinMode(PIN_LSENSOR, INPUT);
   pinMode(PIN_BSENSOR, INPUT);
+  pinMode(PIN_USWITCH, INPUT);
+  pinMode(PIN_BSWITCH, INPUT);
+  pinMode(PIN_NOSLEEP, INPUT);
 
   // Setup the state
   fsm.state = State::Sensor;
