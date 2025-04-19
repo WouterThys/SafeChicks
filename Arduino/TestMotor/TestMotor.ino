@@ -12,5 +12,26 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  fsm_tick();
+  if (digitalRead(PIN_USWITCH) == LOW) {
+    digitalWrite(PIN_DAY_STATE, HIGH);
+
+    motor_stop();
+    delay(2000);
+    motor_start(Direction::Down);
+
+  } else {
+    digitalWrite(PIN_DAY_STATE, LOW);
+  }
+
+
+  if (digitalRead(PIN_BSWITCH) == LOW) {
+    digitalWrite(PIN_ERROR_STATE, HIGH);
+
+    motor_stop();
+    delay(2000);
+    motor_start(Direction::Up);
+
+  } else {
+    digitalWrite(PIN_ERROR_STATE, LOW);
+  }
 }

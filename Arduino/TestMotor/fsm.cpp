@@ -163,7 +163,7 @@ void sanity_check(Fsm &fsm)
 
 void read_input(Fsm &fsm)
 {
-  fsm.lSensorValue = digitalRead(PIN_NOSLEEP);
+  fsm.lSensorValue = analogRead(PIN_LSENSOR);
   fsm.bSensorValue = analogRead(PIN_BSENSOR);
   fsm.uSensorClosed = digitalRead(PIN_USWITCH) == LOW;
   fsm.bSensorClosed = digitalRead(PIN_BSWITCH) == LOW;
@@ -223,8 +223,30 @@ void state_Sensor(Fsm &fsm)
 
 void state_Sleep(Fsm &fsm)
 {
-  delay(100);
-  fsm.next = State::Sensor;
+  /* Handle state */
+  if (digitalRead(PIN_NOSLEEP) == LOW) 
+  {
+    LowPower.deepSleep(SLEEP_TIME_MS);
+  }
+  else 
+  {
+    Serial.println("ping");
+    delay(10000);
+  }
+  fsm.sleepCount++;
+
+  /* Decide on next state */
+  if (fsm.sleepCount >= THR_SLEEP_COUNT)
+  {
+    fsm.sleepCount = 0;
+    // Wake up
+    fsm.next = State::Sensor;
+  }
+  else
+  {
+    // Stay asleep
+    fsm.next = State::Sleep;
+  }
 }
 
 void state_MotorRun(Fsm &fsm)
