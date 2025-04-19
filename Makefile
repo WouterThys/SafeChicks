@@ -1,12 +1,15 @@
+
 SHELL=cmd
+COPY=scp
+
 ARDUINO=arduino-cli
 
 
-sketch:
-	cd Arduino && $(ARDUINO) compile --fqbn arduino:avr:uno SafeChicks
+FILE=concat.txt
 
-upload: sketch
-	cd Arduino && $(ARDUINO) upload -p COM4 --fqbn arduino:avr:uno SafeChicks
 
-list:
-	$(ARDUINO) board list
+download:
+	${COPY} pi@raspberrypi.local:~/source/SerialMonitor/*.txt .\SensorLogs\
+
+show:
+	python.exe .\annelies.py .\SensorLogs\${FILE}

@@ -177,7 +177,7 @@ void state_Sensor(Fsm &fsm)
   bool changed = false;
 
   /* Handle state */
-  if (fsm.lSensorValue < THR_DAY_NIGHT)
+  if (fsm.lSensorValue < THR_NIGHT)
   {
     // Reading a nighttime value
     if (fsm.dayCount == 0)
@@ -193,7 +193,7 @@ void state_Sensor(Fsm &fsm)
       fsm.dayCount--;
     }
   }
-  else
+  else if (fsm.lSensorValue > THR_DAY)
   {
     // Reading a daytime values
     if (fsm.dayCount >= THR_DN_COUNT)

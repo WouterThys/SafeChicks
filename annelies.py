@@ -116,9 +116,8 @@ def plot_sensor_values(log_entries, title):
     states = decode_states(log_entries)
     
     for state in states:
-        print(f"-{state.fromTime} - {state.tillTime}: {state.state}")
+        #print(f"-{state.fromTime} - {state.tillTime}: {state.state}")
         ax.add_patch(Rectangle((state.fromTime, -100), state.tillTime - state.fromTime, 80, color=state.color))
-        # ax.add_patch(Rectangle((states[0].fromTime, -100), states[0].tillTime - states[0].fromTime, 80))
 
     # constant line indicators
     ax.axhline(y=200, color='y', linestyle='--', label='Day/night')
