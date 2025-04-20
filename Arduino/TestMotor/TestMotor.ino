@@ -18,6 +18,7 @@ void loop() {
     motor_stop();
     delay(2000);
     motor_start(Direction::Down);
+    delay(1000);
 
   } else {
     digitalWrite(PIN_DAY_STATE, LOW);
@@ -30,8 +31,10 @@ void loop() {
     motor_stop();
     delay(2000);
     motor_start(Direction::Up);
+    delay(1000);
 
   } else {
     digitalWrite(PIN_ERROR_STATE, LOW);
   }
+
 }
