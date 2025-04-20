@@ -29,11 +29,12 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 #define SECONDS_IN_MINUTE 60
 #define MILLIS_IN_SECOND  1000
 
-const uint32_t  FSM_PERIOD_MS = 100; // The period between FSM state checks
-const uint32_t  SLEEP_TIME_MS = (1 * SECONDS_IN_MINUTE * MILLIS_IN_SECOND) - FSM_PERIOD_MS;  // Low power sleep time in sleep state
-
 const uint16_t  THR_DAY = 200;    // Threshold used to switch from day->night (sensor is max 1023)
 const uint16_t  THR_NIGHT = 200;  // Threshold used to switch from night->day (sensor is max 1023)
+
+const uint32_t  FSM_PERIOD_MS = 100; // The period between FSM state checks
+const uint32_t  SLEEP_TIME_MS = (1 * SECONDS_IN_MINUTE * MILLIS_IN_SECOND) - FSM_PERIOD_MS;  // Low power sleep time in sleep state
+const uint32_t  PWM_DELAY_MS = 6; // Delays between PWM update values, PWM will go from 0 to 100, making the total ramp time PWM_DELAY_MS x 100
 
 /* Total time (consequent) day/night reading will need to trigger is SLEEP_TIME_MS x THR_SLEEP_COUNT x THR_DN_COUNT */
 /* ===> With these values this is 1min x 5 x 3 = 15 min */
@@ -42,7 +43,7 @@ const uint8_t   THR_DN_COUNT = 3;    // Hysteresis counter, depending on time be
 
 /* Total time the motor should be running, this is counted every FSM_PERIOD_MS times.*/
 /* ===> With these values this is 100ms x 50 = 5s */
-const uint8_t   THR_MOTOR_RUN = 50;  // The maximum count the motor should be running. T
+const uint8_t   MAX_MOTOR_COUNT = 50;  // The maximum count the motor should be running. T
                                           
 
 #endif // _CONFIG_H

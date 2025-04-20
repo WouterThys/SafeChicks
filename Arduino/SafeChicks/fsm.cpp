@@ -145,7 +145,7 @@ void sanity_check(Fsm &fsm)
   {
     fsm.error |= ERROR_SENSORS_DOWN_WHILE_DAY;
   }
-  if (fsm.motorRunningCount >= THR_MOTOR_RUN) 
+  if (fsm.motorRunningCount >= MAX_MOTOR_COUNT) 
   {
     // It is back ok..
     if ((fsm.isDoorOpen() && fsm.isDay()) ||
@@ -276,7 +276,7 @@ void state_MotorCheck(Fsm &fsm)
   /* Decide on next state */
   if ((fsm.isDay() && fsm.isDoorOpen()) ||   // Opening door, upper sensor sees the door!
       (fsm.isNight() && fsm.isDoorClosed()) ||   // Closing door, bottom sensor sees the door!
-      (fsm.motorRunningCount > THR_MOTOR_RUN)) // This is taking too long
+      (fsm.motorRunningCount > MAX_MOTOR_COUNT)) // This is taking too long
   {
     fsm.next = State::MotorStop;
   }
