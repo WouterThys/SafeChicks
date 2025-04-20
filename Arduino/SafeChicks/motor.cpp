@@ -37,7 +37,7 @@ void motor_start(Direction d) {
   while (pwm < 100) {
     pwm += 1;
     setDutyPercent(pwm);
-    delay(10); // total ramp of 1s
+    delay(PWM_DELAY_MS); // total ramp of 1s
   }
 }
 
@@ -47,7 +47,7 @@ void motor_stop() {
   while (pwm > 0) {
     pwm -= 1;
     setDutyPercent(pwm);
-    delay(10); // total ramp of 1s
+    delay(PWM_DELAY_MS); // total ramp of 1s
   }
 }
 
