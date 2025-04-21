@@ -257,11 +257,17 @@ void state_MotorRun(Fsm &fsm)
 
   if (fsm.isDay())
   {
-    motor_start(Direction::Up);
+    if (!fsm.isDoorOpen()) 
+    {
+      motor_start(Direction::Up);
+    }
   }
   else
   {
-    motor_start(Direction::Down);
+    if (!fsm.isDoorClosed()) 
+    {
+      motor_start(Direction::Down);
+    }
   }
 
   /* Decide on next state */

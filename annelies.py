@@ -122,7 +122,7 @@ def plot_sensor_values(log_entries, title):
     # constant line indicators
     ax.axhline(y=200, color='y', linestyle='--', label='Day/night')
     ax.axhline(y=868, color='g', linestyle='--', label='Battery full')
-    ax.axhline(y=620, color='r', linestyle='--', label='Battery dead')
+    ax.axhline(y=640, color='r', linestyle='--', label='Battery dead')
 
     # Detect transition from night (False) to day (True) or other way around
     for i in range(len(timestamps)):
