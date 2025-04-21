@@ -34,7 +34,7 @@ const uint16_t  THR_NIGHT = 200;  // Threshold used to switch from night->day (s
 
 const uint32_t  FSM_PERIOD_MS = 100; // The period between FSM state checks
 const uint32_t  SLEEP_TIME_MS = (1 * SECONDS_IN_MINUTE * MILLIS_IN_SECOND) - FSM_PERIOD_MS;  // Low power sleep time in sleep state
-const uint32_t  PWM_DELAY_MS = 6; // Delays between PWM update values, PWM will go from 0 to 100, making the total ramp time PWM_DELAY_MS x 100
+const uint32_t  PWM_DELAY_MS = 10; // Delays between PWM update values, PWM will go from 0 to 100, making the total ramp time PWM_DELAY_MS x 100
 
 /* Total time (consequent) day/night reading will need to trigger is SLEEP_TIME_MS x THR_SLEEP_COUNT x THR_DN_COUNT */
 /* ===> With these values this is 1min x 5 x 3 = 15 min */
