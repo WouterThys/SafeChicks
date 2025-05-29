@@ -6,6 +6,8 @@
 #include <ArduinoJson.h>
 #include <string>
 
+#define LOW_POWER (digitalRead(PIN_NOSLEEP) == LOW)
+
 // Private stuff -----------------------------------------------------------------------------
 
 enum State
@@ -99,12 +101,12 @@ const char* print_state(enum State state)
 
 void debug(Fsm &fsm)
 {
-  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-  digitalWrite(PIN_ERROR_STATE, fsm.error > 0 ? HIGH : LOW);
-  digitalWrite(PIN_DAY_STATE, fsm.isDay() ? HIGH : LOW);
-
-  if (DEBUG_ENABLED) 
+  if (!LOW_POWER)
   {
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+    digitalWrite(PIN_ERROR_STATE, fsm.error > 0 ? HIGH : LOW);
+    digitalWrite(PIN_DAY_STATE, fsm.isDay() ? HIGH : LOW);
+
     // Allocate the JSON document
     JsonDocument doc;
 
@@ -224,13 +226,13 @@ void state_Sensor(Fsm &fsm)
 void state_Sleep(Fsm &fsm)
 {
   /* Handle state */
-  if (digitalRead(PIN_NOSLEEP) == LOW) 
+  if (LOW_POWER) 
   {
     LowPower.deepSleep(SLEEP_TIME_MS);
   }
   else 
   {
-    Serial.println("ping");
+    Serial.println("alive");
     delay(10000);
   }
   fsm.sleepCount++;
@@ -327,7 +329,7 @@ void state_execute(Fsm &fsm)
 
 void fsm_setup()
 {
-  if (DEBUG_ENABLED) 
+  if (!LOW_POWER) 
   {
     Serial.begin(9600);
     Serial1.begin(9600);

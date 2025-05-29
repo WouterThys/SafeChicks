@@ -34,7 +34,7 @@ void motor_start(Direction d) {
   {
     digitalWrite(PIN_MOTOR_DIR, 0);
   }
-  while (pwm < 100) {
+  while (pwm < MAX_MOTOR_SPEED) {
     pwm += 1;
     setDutyPercent(pwm);
     delay(PWM_DELAY_MS); // total ramp of 1s
