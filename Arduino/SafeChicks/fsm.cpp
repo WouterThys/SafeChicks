@@ -72,6 +72,9 @@ struct Fsm
 
 };
 
+void state_execute(Fsm &fsm);
+
+
 Fsm fsm;
 
 const char* print_state(enum State state)
@@ -124,9 +127,42 @@ void debug(Fsm &fsm)
     doc["bSensorClosed"] = fsm.bSensorClosed;
     doc["error"] = fsm.error;
 
-    serializeJson(doc, Serial1);
-    Serial1.print("\n");
-    Serial1.flush(); // Flush because we are going to sleep soon
+    // Note: Serial1 is on other connector. 
+    serializeJson(doc, Serial);
+    Serial.print("\n");
+    
+    // Read from serial here?
+    if (Serial.available() > 0) 
+    {
+        // read the incoming byte:
+        char incomingByte = Serial.read();
+
+        switch(incomingByte) 
+        {
+          case 'U': 
+            fsm.day = true;
+            fsm.state = State::MotorRun;
+            Serial.println("Faking day");
+            break;
+          case 'D': 
+            fsm.day = false;
+            fsm.state = State::MotorRun;
+            Serial.println("Faking night");
+            break;
+          default:
+            Serial.print("Input unknown: ");
+            Serial.println(incomingByte);
+            break;
+        }
+
+        while (Serial.available() > 0) 
+        {
+          // Empty the buffer
+          Serial.read();
+        }
+    }
+
+    Serial.flush(); // Flush because we are going to sleep soon
   }
 }
 
@@ -232,8 +268,7 @@ void state_Sleep(Fsm &fsm)
   }
   else 
   {
-    Serial.println("alive");
-    delay(10000);
+    delay(LOW_POWER_SLEEP_TIME_MS);
   }
   fsm.sleepCount++;
 
@@ -305,6 +340,8 @@ void state_MotorStop(Fsm &fsm)
 
 void state_execute(Fsm &fsm)
 {
+  Serial.print("Will execute: ");
+  Serial.println(print_state(fsm.state));
   switch (fsm.state)
   {
   case State::Sensor:
@@ -332,7 +369,6 @@ void fsm_setup()
   if (!LOW_POWER) 
   {
     Serial.begin(9600);
-    Serial1.begin(9600);
   }
 
   // Pin control
