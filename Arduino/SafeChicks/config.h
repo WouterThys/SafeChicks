@@ -42,7 +42,7 @@ const uint8_t   THR_DN_COUNT = 3;    // Hysteresis counter, depending on time be
 /* Total time the motor should be running, this is counted every FSM_PERIOD_MS times.*/
 /* ===> With these values this is 100ms x 50 = 5s */
 const uint8_t   MAX_MOTOR_COUNT = 50;  // The maximum count the motor should be running.
-const uint8_t   MAX_MOTOR_SPEED = 80;  // PWM percentage
+const uint8_t   MAX_MOTOR_SPEED = 50;  // PWM percentage
                                           
 
 #endif // _CONFIG_H
