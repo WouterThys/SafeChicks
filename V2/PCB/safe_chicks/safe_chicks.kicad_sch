@@ -3110,6 +3110,16 @@
 	)
 	(wire
 		(pts
+			(xy 153.67 66.04) (xy 158.75 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "065b2c7a-e4ac-46bc-aa25-1dd26e2f73c0")
+	)
+	(wire
+		(pts
 			(xy 120.65 67.31) (xy 120.65 68.58)
 		)
 		(stroke
@@ -3180,13 +3190,13 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 50.8) (xy 163.83 50.8)
+			(xy 158.75 110.49) (xy 158.75 133.35)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1278316a-abf3-441a-9e56-32dfb312edb6")
+		(uuid "10af29b4-024d-4fba-83fe-144dfd973538")
 	)
 	(wire
 		(pts
@@ -3210,6 +3220,16 @@
 	)
 	(wire
 		(pts
+			(xy 217.17 60.96) (xy 217.17 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "16c6853c-9fe9-4859-8153-a6a9e5a0b93e")
+	)
+	(wire
+		(pts
 			(xy 172.72 53.34) (xy 176.53 53.34)
 		)
 		(stroke
@@ -3230,16 +3250,6 @@
 	)
 	(wire
 		(pts
-			(xy 226.06 45.72) (xy 242.57 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1cca89da-8a99-42e2-8478-759f7c5ce9a6")
-	)
-	(wire
-		(pts
 			(xy 104.14 58.42) (xy 114.3 58.42)
 		)
 		(stroke
@@ -3250,6 +3260,16 @@
 	)
 	(wire
 		(pts
+			(xy 153.67 63.5) (xy 157.48 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f7d9825-2972-449c-be97-6dde35953faf")
+	)
+	(wire
+		(pts
 			(xy 38.1 63.5) (xy 43.18 63.5)
 		)
 		(stroke
@@ -3257,16 +3277,6 @@
 			(type default)
 		)
 		(uuid "217dfc63-8d5b-4424-8f9c-565dfa9c3d2b")
-	)
-	(wire
-		(pts
-			(xy 226.06 82.55) (xy 233.68 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "22ffe30f-a6ea-47ea-ac82-b9d5004b02a4")
 	)
 	(wire
 		(pts
@@ -3340,6 +3350,16 @@
 	)
 	(wire
 		(pts
+			(xy 219.71 63.5) (xy 219.71 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c182bc7-e194-4b11-9caa-1befdecd98bf")
+	)
+	(wire
+		(pts
 			(xy 240.03 55.88) (xy 240.03 58.42)
 		)
 		(stroke
@@ -3410,6 +3430,16 @@
 	)
 	(wire
 		(pts
+			(xy 153.67 60.96) (xy 154.94 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31c6ff24-8568-4246-a3e3-f4e564dcaece")
+	)
+	(wire
+		(pts
 			(xy 143.51 24.13) (xy 154.94 24.13)
 		)
 		(stroke
@@ -3417,16 +3447,6 @@
 			(type default)
 		)
 		(uuid "33d25eb1-fe48-4d8d-8767-5aa5923bf40f")
-	)
-	(wire
-		(pts
-			(xy 226.06 48.26) (xy 233.68 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3579e995-0fe3-4d3c-88ca-d11ff246b5a1")
 	)
 	(wire
 		(pts
@@ -3467,6 +3487,26 @@
 			(type default)
 		)
 		(uuid "391f5be3-b1bc-4726-8c44-da97028025d9")
+	)
+	(wire
+		(pts
+			(xy 223.52 82.55) (xy 233.68 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d6b1555-edf3-4fcf-be4e-019cc92df1d3")
+	)
+	(wire
+		(pts
+			(xy 226.06 66.04) (xy 226.06 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d99a6ae-717c-4852-b144-892b2222fcc2")
 	)
 	(wire
 		(pts
@@ -3630,6 +3670,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 66.04) (xy 226.06 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e13a60d-ad05-46a4-af87-a6ccb9dc83f4")
+	)
+	(wire
+		(pts
 			(xy 154.94 31.75) (xy 154.94 33.02)
 		)
 		(stroke
@@ -3680,6 +3730,16 @@
 	)
 	(wire
 		(pts
+			(xy 153.67 107.95) (xy 163.83 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57e400e7-3338-4cb5-8c35-9274599c749f")
+	)
+	(wire
+		(pts
 			(xy 71.12 97.79) (xy 72.39 97.79)
 		)
 		(stroke
@@ -3720,16 +3780,6 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 135.89) (xy 163.83 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5da1ee92-1e05-41c6-87da-4d53a3c60f2d")
-	)
-	(wire
-		(pts
 			(xy 163.83 115.57) (xy 163.83 116.84)
 		)
 		(stroke
@@ -3737,6 +3787,16 @@
 			(type default)
 		)
 		(uuid "5e111a96-2e9f-4bba-82c6-45bed7bd8dc3")
+	)
+	(wire
+		(pts
+			(xy 217.17 45.72) (xy 242.57 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5e15fa58-6650-4bcb-8aef-b0df28f230ac")
 	)
 	(wire
 		(pts
@@ -3760,13 +3820,13 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 107.95) (xy 163.83 107.95)
+			(xy 156.21 68.58) (xy 156.21 78.74)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6456fecf-b0e9-4474-ae4f-5e2109e6e232")
+		(uuid "647f86d0-4f55-4853-a1f9-23e166c01060")
 	)
 	(wire
 		(pts
@@ -3810,6 +3870,16 @@
 	)
 	(wire
 		(pts
+			(xy 153.67 110.49) (xy 158.75 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6cf96ad9-51a4-4e41-b30c-25a3cb8ee6b5")
+	)
+	(wire
+		(pts
 			(xy 242.57 133.35) (xy 242.57 135.89)
 		)
 		(stroke
@@ -3827,6 +3897,16 @@
 			(type default)
 		)
 		(uuid "71288175-d3c9-454f-8f5a-0ffbfd14fc5d")
+	)
+	(wire
+		(pts
+			(xy 154.94 60.96) (xy 154.94 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "71c58f02-44dc-483e-9dbe-bc331cad8820")
 	)
 	(wire
 		(pts
@@ -3900,6 +3980,16 @@
 	)
 	(wire
 		(pts
+			(xy 157.48 53.34) (xy 163.83 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75e7975c-a583-4b83-8982-9c71c59f1831")
+	)
+	(wire
+		(pts
 			(xy 227.33 148.59) (xy 227.33 152.4)
 		)
 		(stroke
@@ -3940,6 +4030,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 63.5) (xy 219.71 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7938d4da-e315-4fc5-894f-cf36efba0bb3")
+	)
+	(wire
+		(pts
 			(xy 163.83 53.34) (xy 163.83 55.88)
 		)
 		(stroke
@@ -3970,16 +4070,6 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 105.41) (xy 163.83 105.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7e427945-8947-430d-9822-f0113589f698")
-	)
-	(wire
-		(pts
 			(xy 95.25 27.94) (xy 95.25 30.48)
 		)
 		(stroke
@@ -3987,6 +4077,16 @@
 			(type default)
 		)
 		(uuid "7ea0983a-2666-4880-b4fa-3d9d25894130")
+	)
+	(wire
+		(pts
+			(xy 157.48 63.5) (xy 157.48 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f364186-8534-40db-8908-6da7c71dd429")
 	)
 	(wire
 		(pts
@@ -4030,16 +4130,6 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 78.74) (xy 163.83 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "85c40055-f32b-4a27-b82c-cc0ef23805fb")
-	)
-	(wire
-		(pts
 			(xy 104.14 53.34) (xy 109.22 53.34)
 		)
 		(stroke
@@ -4077,6 +4167,16 @@
 			(type default)
 		)
 		(uuid "8aeba760-3a11-456f-b185-6e96e4eea7aa")
+	)
+	(wire
+		(pts
+			(xy 153.67 113.03) (xy 156.21 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bae10eb-a88b-489b-a3b3-dbd20cd1d7cf")
 	)
 	(wire
 		(pts
@@ -4220,6 +4320,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 68.58) (xy 223.52 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7535c11-a8ee-4d72-b2e4-a5ff83a7dc79")
+	)
+	(wire
+		(pts
 			(xy 163.83 101.6) (xy 163.83 105.41)
 		)
 		(stroke
@@ -4230,6 +4340,16 @@
 	)
 	(wire
 		(pts
+			(xy 158.75 66.04) (xy 158.75 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7940e16-2d17-4b01-b718-7f9974faff28")
+	)
+	(wire
+		(pts
 			(xy 104.14 55.88) (xy 114.3 55.88)
 		)
 		(stroke
@@ -4237,6 +4357,16 @@
 			(type default)
 		)
 		(uuid "a82a5875-5b6c-4c24-8318-c8ac63dc56ad")
+	)
+	(wire
+		(pts
+			(xy 153.67 105.41) (xy 163.83 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a8dfd2d2-6a7c-439c-b589-45e2ae4eb544")
 	)
 	(wire
 		(pts
@@ -4300,6 +4430,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 78.74) (xy 163.83 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ad595ebe-6bfc-4b78-b6bd-e206cedf520c")
+	)
+	(wire
+		(pts
 			(xy 143.51 24.13) (xy 143.51 25.4)
 		)
 		(stroke
@@ -4317,6 +4457,16 @@
 			(type default)
 		)
 		(uuid "af480a08-8d3b-4782-abe8-b6fdc7abe148")
+	)
+	(wire
+		(pts
+			(xy 223.52 68.58) (xy 223.52 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1639f94-db13-46df-a67c-4209b40e88ab")
 	)
 	(wire
 		(pts
@@ -4380,6 +4530,16 @@
 	)
 	(wire
 		(pts
+			(xy 219.71 48.26) (xy 233.68 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd56e90d-d695-4428-a7c4-a4f203c4ec36")
+	)
+	(wire
+		(pts
 			(xy 106.68 76.2) (xy 106.68 68.58)
 		)
 		(stroke
@@ -4410,16 +4570,6 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 53.34) (xy 163.83 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bfa734da-12f8-4fa5-ac04-500c60bd035d")
-	)
-	(wire
-		(pts
 			(xy 39.37 73.66) (xy 43.18 73.66)
 		)
 		(stroke
@@ -4427,6 +4577,16 @@
 			(type default)
 		)
 		(uuid "c25750c7-c678-488c-8020-dc191087ee8c")
+	)
+	(wire
+		(pts
+			(xy 156.21 113.03) (xy 156.21 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3657379-4327-4c7b-8911-a41da3e122c4")
 	)
 	(wire
 		(pts
@@ -4540,6 +4700,16 @@
 	)
 	(wire
 		(pts
+			(xy 154.94 50.8) (xy 163.83 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7c54d2b-18a6-41a2-94b2-dfecc2abf740")
+	)
+	(wire
+		(pts
 			(xy 172.72 78.74) (xy 176.53 78.74)
 		)
 		(stroke
@@ -4590,6 +4760,16 @@
 	)
 	(wire
 		(pts
+			(xy 153.67 68.58) (xy 156.21 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dfa452a2-ba32-4d9e-bb3a-d16f70bfb47c")
+	)
+	(wire
+		(pts
 			(xy 39.37 68.58) (xy 43.18 68.58)
 		)
 		(stroke
@@ -4637,6 +4817,26 @@
 			(type default)
 		)
 		(uuid "e67e5ad2-071a-4e12-b6c4-dbb20029ba1a")
+	)
+	(wire
+		(pts
+			(xy 156.21 135.89) (xy 163.83 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea6ae2d3-054d-4b79-b6d5-572eabaa5d56")
+	)
+	(wire
+		(pts
+			(xy 212.09 60.96) (xy 217.17 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ed557830-a57e-4ce8-bc8d-f61ff04ff7fd")
 	)
 	(wire
 		(pts
@@ -4928,6 +5128,16 @@
 		)
 		(uuid "57225a5b-939d-4624-a014-08e0853dbcd9")
 	)
+	(label "BTN-DOWN"
+		(at 157.48 135.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5b84d262-0eb1-4779-b077-4dcbae0c5d93")
+	)
 	(label "PWM2"
 		(at 109.22 45.72 0)
 		(effects
@@ -5038,6 +5248,16 @@
 		)
 		(uuid "a511739a-6071-4fb5-a84d-9eb8a215c496")
 	)
+	(label "SW-Upper"
+		(at 154.94 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ac7c976b-f0e8-41bf-b8bf-344d78cf6e07")
+	)
 	(label "PGD"
 		(at 179.07 30.48 180)
 		(effects
@@ -5087,6 +5307,16 @@
 			(justify right bottom)
 		)
 		(uuid "d294d170-fd48-418c-ba69-802d43858382")
+	)
+	(label "BTN-UP"
+		(at 154.94 107.95 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d486c265-4950-48de-a731-8eee8a1ac54a")
 	)
 	(label "DIR1"
 		(at 109.22 53.34 0)
@@ -5158,6 +5388,16 @@
 		)
 		(uuid "f06a61ee-6a18-433c-839c-af1bc8cbc132")
 	)
+	(label "SW-Bottom"
+		(at 154.94 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f24411fa-7564-44ac-b07c-1fe41638393a")
+	)
 	(label "B-SW"
 		(at 39.37 71.12 180)
 		(effects
@@ -5223,7 +5463,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 247.65 138.43 0)
 			(effects
 				(font
@@ -5425,7 +5665,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 227.33 138.43 0)
 			(effects
 				(font
@@ -5629,7 +5869,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_THT:D_DO-15_P10.16mm_Horizontal"
 			(at 133.35 27.94 90)
 			(effects
 				(font
@@ -5715,7 +5955,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 107.95 63.5 0)
 			(effects
 				(font
@@ -5849,7 +6089,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Button_Switch_THT:SW_PUSH_6mm_H4.3mm"
 			(at 113.03 71.12 0)
 			(effects
 				(font
@@ -5893,16 +6133,16 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
-		(at 124.46 29.21 180)
+		(at 124.46 26.67 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "16c260d2-963e-4339-8838-363876d60737")
 		(property "Reference" "J1"
-			(at 124.46 20.32 0)
+			(at 124.46 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5910,15 +6150,15 @@
 			)
 		)
 		(property "Value" "5V"
-			(at 124.46 22.86 0)
+			(at 124.46 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 124.46 29.21 0)
+		(property "Footprint" "TerminalBlock:TerminalBlock_bornier-2_P5.08mm"
+			(at 124.46 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5927,7 +6167,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 124.46 29.21 0)
+			(at 124.46 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5936,7 +6176,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 124.46 29.21 0)
+			(at 124.46 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6050,7 +6290,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 163.83 113.03 0)
 			(effects
 				(font
@@ -6093,74 +6333,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 220.98 45.72 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "254e66b7-d437-4c1f-85da-a91a29cfcf29")
-		(property "Reference" "J8"
-			(at 220.98 51.562 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "SP-Sense"
-			(at 220.98 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 220.98 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 220.98 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 220.98 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "70ec4ad9-7a8a-43f9-8c30-98028aab264e")
-		)
-		(pin "1"
-			(uuid "1472765e-d97c-4d81-aff8-f617ed03ef0d")
-		)
-		(instances
-			(project "safe_chicks"
-				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
-					(reference "J8")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector_Generic:Conn_01x04")
 		(at 196.85 26.67 0)
 		(mirror y)
@@ -6187,7 +6359,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Molex:Molex_PicoBlade_53047-0410_1x04_P1.25mm_Vertical"
 			(at 196.85 26.67 0)
 			(effects
 				(font
@@ -6263,7 +6435,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Crystal:Crystal_HC49-U_Vertical"
 			(at 30.48 60.96 0)
 			(effects
 				(font
@@ -6306,6 +6478,81 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector_Generic:Conn_01x04")
+		(at 207.01 63.5 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2867a834-3804-4156-9d44-7753e8645e3e")
+		(property "Reference" "J6"
+			(at 207.01 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Sensors"
+			(at 207.01 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_Molex:Molex_PicoBlade_53047-0410_1x04_P1.25mm_Vertical"
+			(at 207.01 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 207.01 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 207.01 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "4d8c1ca5-ffbb-41f7-84ce-01b23ed890fd")
+		)
+		(pin "4"
+			(uuid "bf9df643-c17c-4fba-9950-44c16c30e42c")
+		)
+		(pin "1"
+			(uuid "d93e74a8-e3bb-4fb2-b7e1-e20e89ccbc50")
+		)
+		(pin "3"
+			(uuid "6b8284ff-c75e-4b83-b9e9-e4eb753a7a5f")
+		)
+		(instances
+			(project "safe_chicks"
+				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
+					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 213.36 27.94 0)
 		(unit 1)
@@ -6333,7 +6580,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 213.36 27.94 0)
 			(effects
 				(font
@@ -6403,7 +6650,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 143.51 27.94 0)
 			(effects
 				(font
@@ -6536,7 +6783,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 233.68 86.36 0)
 			(effects
 				(font
@@ -6806,7 +7053,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
 			(at 247.65 146.05 90)
 			(effects
 				(font
@@ -6951,7 +7198,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical"
 			(at 170.18 27.94 0)
 			(effects
 				(font
@@ -7097,7 +7344,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 163.83 58.42 0)
 			(effects
 				(font
@@ -7134,74 +7381,6 @@
 			(project "safe_chicks"
 				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
 					(reference "R6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 153.67 105.41 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "482a332a-fecd-488a-be4c-3f51bcefbf86")
-		(property "Reference" "J12"
-			(at 153.67 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MU-BTN"
-			(at 153.67 102.616 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 153.67 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 153.67 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 153.67 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "c5358830-165a-4383-ba4b-1cb477e50657")
-		)
-		(pin "1"
-			(uuid "eba1e79a-4dba-469f-8a67-a593c592f022")
-		)
-		(instances
-			(project "safe_chicks"
-				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
-					(reference "J12")
 					(unit 1)
 				)
 			)
@@ -7299,7 +7478,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 163.83 140.97 0)
 			(effects
 				(font
@@ -7369,7 +7548,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 240.03 60.96 0)
 			(effects
 				(font
@@ -7439,7 +7618,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
 			(at 237.49 146.05 90)
 			(effects
 				(font
@@ -7774,74 +7953,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 153.67 76.2 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "57ba1b6c-4780-4e34-87ed-178b0d9e09ae")
-		(property "Reference" "J10"
-			(at 153.67 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "B-SW"
-			(at 153.67 73.406 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 153.67 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 153.67 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 153.67 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "7695a8f7-e619-46f6-8129-cc7f13890900")
-		)
-		(pin "1"
-			(uuid "0ea271f2-dafc-4bf5-aa58-e550804a16c0")
-		)
-		(instances
-			(project "safe_chicks"
-				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
-					(reference "J10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 176.53 62.23 0)
 		(unit 1)
@@ -7933,7 +8044,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 245.11 55.88 0)
 			(effects
 				(font
@@ -8069,7 +8180,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad_Via"
 			(at 70.857 135.3681 0)
 			(effects
 				(font
@@ -8133,7 +8244,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 240.03 86.36 0)
 			(effects
 				(font
@@ -8203,7 +8314,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 83.82 25.4 0)
 			(effects
 				(font
@@ -8337,7 +8448,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 232.41 138.43 0)
 			(effects
 				(font
@@ -8471,7 +8582,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 170.18 107.95 0)
 			(effects
 				(font
@@ -8538,7 +8649,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 245.11 45.72 0)
 			(effects
 				(font
@@ -8575,74 +8686,6 @@
 			(project "safe_chicks"
 				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
 					(reference "R2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 153.67 50.8 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9d4269e1-9fea-4f0c-b5e6-1b2f02fdee17")
-		(property "Reference" "J7"
-			(at 153.67 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "U-SW"
-			(at 153.67 48.006 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 153.67 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 153.67 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 153.67 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "186a8be6-8e3b-4831-8e39-4ea1caf3f9b8")
-		)
-		(pin "1"
-			(uuid "46188e55-d489-48ee-95fd-d068d2bcd24f")
-		)
-		(instances
-			(project "safe_chicks"
-				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
-					(reference "J7")
 					(unit 1)
 				)
 			)
@@ -8805,7 +8848,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 170.18 135.89 0)
 			(effects
 				(font
@@ -8872,7 +8915,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 163.83 83.82 0)
 			(effects
 				(font
@@ -8939,7 +8982,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 170.18 53.34 0)
 			(effects
 				(font
@@ -9009,7 +9052,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 176.53 113.03 0)
 			(effects
 				(font
@@ -9079,7 +9122,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
 			(at 232.41 146.05 90)
 			(effects
 				(font
@@ -9158,7 +9201,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 176.53 83.82 0)
 			(effects
 				(font
@@ -9228,7 +9271,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
 			(at 260.35 152.4 0)
 			(effects
 				(font
@@ -9341,33 +9384,34 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 220.98 80.01 0)
+		(lib_id "Connector_Generic:Conn_01x04")
+		(at 148.59 107.95 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ba46be84-9146-457a-8ee1-c21a9062f17f")
-		(property "Reference" "J11"
-			(at 220.98 85.852 0)
+		(fields_autoplaced yes)
+		(uuid "ba17f36a-48fd-419d-8f11-cd401d4466c0")
+		(property "Reference" "J4"
+			(at 148.59 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "PH-Sense"
-			(at 220.98 77.47 0)
+		(property "Value" "Buttons"
+			(at 148.59 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" ""
-			(at 220.98 80.01 0)
+		(property "Footprint" "Connector_Molex:Molex_PicoBlade_53047-0410_1x04_P1.25mm_Vertical"
+			(at 148.59 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9376,7 +9420,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 220.98 80.01 0)
+			(at 148.59 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9384,8 +9428,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 220.98 80.01 0)
+		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 148.59 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9394,15 +9438,21 @@
 			)
 		)
 		(pin "2"
-			(uuid "936acc34-1951-4c1e-8cd4-3f6ce04b1c8c")
+			(uuid "12450e90-793d-41f3-9058-4151edc896fd")
+		)
+		(pin "4"
+			(uuid "e5caf77f-3f2a-4d38-ab4a-1a31345ca39d")
 		)
 		(pin "1"
-			(uuid "ba6665a8-6085-47bf-a218-285b945ef52d")
+			(uuid "78a2dfcd-07d9-414b-b1ad-8705a763181a")
+		)
+		(pin "3"
+			(uuid "a81c69bb-015d-4692-b708-15c00fd9f098")
 		)
 		(instances
-			(project "safe_chicks"
+			(project ""
 				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
-					(reference "J11")
+					(reference "J4")
 					(unit 1)
 				)
 			)
@@ -9436,7 +9486,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
 			(at 227.33 146.05 90)
 			(effects
 				(font
@@ -9515,7 +9565,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad_Via"
 			(at 49.53 134.62 0)
 			(effects
 				(font
@@ -9710,7 +9760,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 237.49 138.43 0)
 			(effects
 				(font
@@ -9780,7 +9830,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 176.53 58.42 0)
 			(effects
 				(font
@@ -9847,7 +9897,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 170.18 78.74 0)
 			(effects
 				(font
@@ -9981,7 +10031,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 242.57 138.43 0)
 			(effects
 				(font
@@ -10048,7 +10098,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 113.03 68.58 0)
 			(effects
 				(font
@@ -10118,7 +10168,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3216-10_Kemet-I_HandSolder"
 			(at 154.94 27.94 0)
 			(effects
 				(font
@@ -10188,7 +10238,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3216-10_Kemet-I_HandSolder"
 			(at 95.25 25.4 0)
 			(effects
 				(font
@@ -10298,7 +10348,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 49.53 127 0)
+		(at 48.26 116.84 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -10307,7 +10357,7 @@
 		(fields_autoplaced yes)
 		(uuid "d3a54c85-9c7d-4915-b953-f26d25faeaf5")
 		(property "Reference" "H1"
-			(at 52.07 125.7299 0)
+			(at 50.8 115.5699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10316,7 +10366,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 52.07 128.2699 0)
+			(at 50.8 118.1099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10324,8 +10374,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 49.53 127 0)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad_Via"
+			(at 48.26 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10334,7 +10384,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 49.53 127 0)
+			(at 48.26 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10343,7 +10393,7 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 49.53 127 0)
+			(at 48.26 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10455,7 +10505,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
 			(at 242.57 146.05 90)
 			(effects
 				(font
@@ -10501,74 +10551,6 @@
 			(project "safe_chicks"
 				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
 					(reference "D5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 153.67 133.35 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "dd126c39-63a4-4260-844d-067c1fafd334")
-		(property "Reference" "J13"
-			(at 153.67 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MD-BTN"
-			(at 153.67 130.556 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 153.67 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 153.67 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 153.67 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "9816d156-a785-4766-afcc-c8fbb7b1c9b1")
-		)
-		(pin "1"
-			(uuid "b8a6e9a9-afa1-432f-9ded-323148c47eba")
-		)
-		(instances
-			(project "safe_chicks"
-				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
-					(reference "J13")
 					(unit 1)
 				)
 			)
@@ -10736,7 +10718,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad_Via"
 			(at 72.39 128.27 0)
 			(effects
 				(font
@@ -10797,7 +10779,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 245.11 50.8 0)
 			(effects
 				(font
@@ -10931,7 +10913,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
 			(at 252.73 138.43 0)
 			(effects
 				(font
@@ -11001,7 +10983,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 176.53 140.97 0)
 			(effects
 				(font
@@ -11071,7 +11053,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
 			(at 252.73 146.05 90)
 			(effects
 				(font
@@ -11214,7 +11196,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical"
 			(at 255.27 26.67 0)
 			(effects
 				(font
@@ -11263,6 +11245,81 @@
 			(project "safe_chicks"
 				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
 					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x04")
+		(at 148.59 63.5 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fb2a7ef2-cd05-4283-8da8-3703a95fdfbb")
+		(property "Reference" "J8"
+			(at 148.59 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Switches"
+			(at 148.59 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_Molex:Molex_PicoBlade_53047-0410_1x04_P1.25mm_Vertical"
+			(at 148.59 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 148.59 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 148.59 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "e88000be-40b9-4ce9-915d-d27077ed8102")
+		)
+		(pin "4"
+			(uuid "68f57482-8779-4925-8881-9d429dd7556a")
+		)
+		(pin "1"
+			(uuid "8b5afdb6-9db0-4bc5-8e26-ac3cfff5955d")
+		)
+		(pin "3"
+			(uuid "5fba41fa-c033-4e0b-9328-3fb895dafa3f")
+		)
+		(instances
+			(project "safe_chicks"
+				(path "/2f031bef-c9eb-433b-9259-f3c6ae0aa169"
+					(reference "J8")
 					(unit 1)
 				)
 			)
