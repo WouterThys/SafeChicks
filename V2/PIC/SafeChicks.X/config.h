@@ -10,8 +10,8 @@
  ******************************************************************************/
 
 /* This file contains all pin mapping of the board */
-#define PIN_MOTOR_PWM PORTBbits.RB0     // Pin for motor PWM
-#define PIN_MOTOR_DIR PORTBbits.RB1     // Pin for motor direction
+#define PIN_MOTOR_PWM PORTCbits.RC2     // Pin for motor PWM
+#define PIN_MOTOR_DIR PORTCbits.RC5     // Pin for motor direction
 
 //const uint8_t   PIN_LSENSOR = 0; // Pin for reading light sensor
 //const uint8_t   PIN_BSENSOR = 0; // Pin for reading battery sensor
@@ -58,8 +58,8 @@ const uint16_t  THR_NIGHT = 200;  // Threshold used to switch from night->day (s
 
 /* Total time the motor should be running, this is counted every FSM_PERIOD_MS times.*/
 /* ===> With these values this is 100ms x 50 = 5s */
-const uint8_t   MAX_MOTOR_COUNT = 50;  // The maximum count the motor should be running.
-const uint8_t   MAX_MOTOR_SPEED = 50;  // PWM percentage
+#define   MAX_MOTOR_COUNT   50  /* The max count the motor should be running. */
+#define   MAX_MOTOR_SPEED   100 /* PWM percentage                             */
 
 
 

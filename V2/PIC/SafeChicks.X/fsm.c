@@ -12,11 +12,11 @@
 
 /* Enum to keep the FSM state */
 typedef enum {
-    Calculate, /* Calculate depending on input */
-    Sleep, /* Sleep for certain time before starting again */
-    MotorRun, /* Start running the motor up or down */
-    MotorCheck, /* Read sensors to see if motor should stop */
-    MotorStop /* Stop running the motor */
+    Calculate,    /* Calculate depending on input                             */
+    Sleep,        /* Sleep for certain time before starting again             */
+    MotorStart,   /* Start running the motor up or down                       */
+    MotorRunning, /* Run the motor, read sensors to see if motor should stop  */
+    MotorStop     /* Stop running the motor                                   */
 } State;
 
 /* All FSM variables and data  */
@@ -98,11 +98,11 @@ static void state_Calculate(Fsm * fsm);
 static void state_Sleep(Fsm * fsm);
 
 /**
- * State function for State::MotorRun
+ * State function for State::MotorStart
  * Run the motor up or down and immediately go to the State::MotorCheck
  * @param fsm
  */
-static void state_MotorRun(Fsm * fsm);
+static void state_MotorStart(Fsm * fsm);
 
 /**
  * State function for State::MotorCheck
@@ -110,7 +110,7 @@ static void state_MotorRun(Fsm * fsm);
  * When the motor should stop go to State::MotorStop
  * @param fsm
  */
-static void state_MotorCheck(Fsm * fsm);
+static void state_MotorRunning(Fsm * fsm);
 
 /**
  * State function for State::MotorStop
@@ -182,11 +182,11 @@ void state_execute(Fsm * fsm) {
         case Sleep:
             state_Sleep(fsm);
             break;
-        case MotorRun:
-            state_MotorRun(fsm);
+        case MotorStart:
+            state_MotorStart(fsm);
             break;
-        case MotorCheck:
-            state_MotorCheck(fsm);
+        case MotorRunning:
+            state_MotorRunning(fsm);
             break;
         case MotorStop:
             state_MotorStop(fsm);
@@ -322,7 +322,7 @@ void state_Calculate(Fsm * fsm) {
 
     /* Decide on next state */
     if (changed) {
-        fsm->next = MotorRun;
+        fsm->next = MotorStart;
     } else {
         fsm->next = Sleep;
     }
@@ -348,7 +348,7 @@ void state_Sleep(Fsm * fsm) {
     }
 }
 
-void state_MotorRun(Fsm * fsm) {
+void state_MotorStart(Fsm * fsm) {
     /* Handle state */
 
     fsm->motorRunningCount = 0;
@@ -364,10 +364,10 @@ void state_MotorRun(Fsm * fsm) {
     }
 
     /* Decide on next state */
-    fsm->next = MotorCheck;
+    fsm->next = MotorRunning;
 }
 
-void state_MotorCheck(Fsm * fsm) {
+void state_MotorRunning(Fsm * fsm) {
     /* Handle state */
     fsm->motorRunningCount++;
 
@@ -379,7 +379,7 @@ void state_MotorCheck(Fsm * fsm) {
         fsm->next = MotorStop;
     } else {
         // Keep in the current state
-        fsm->next = MotorCheck;
+        fsm->next = MotorRunning;
         // TODO: sleep before checking again
         __delay_ms(100);
     }
