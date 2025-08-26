@@ -3,7 +3,7 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 
-#define _XTAL_FREQ 16000000UL /* 16 MHz crystal */
+#define _XTAL_FREQ 1000000UL /* 1 MHz clock */
 
 /*******************************************************************************
  *                      PIN MAPPING 
