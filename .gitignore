@@ -3,3 +3,5 @@
 /SensorLogs/*.txt
 /**/safe_chicks-backups/*.zip
 /**/SensorLogs/*.txt
+/V2/PIC/SafeChicks.X/build/*
+/V2/PIC/SafeChicks.X/dist/*
