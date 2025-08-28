@@ -3,8 +3,9 @@
 
 #include "config.h"
 
-#include "motor.h"
-#include "fsm.h"
+#include "Drivers/MOTOR_Driver.h"
+#include "Drivers/UART_Driver.h"
+#include "Controllers/FSM_Controller.h"
 
 /*******************************************************************************
  *                      Local defines 
@@ -56,25 +57,30 @@ void initialize()
     while(OSCCONbits.IOFS == 0);    /* Wait for OSC to be stable */
     
     /* Port setup */
-    TRISA = 0;
-    TRISB = 0;
-    TRISC = 0;
+    TRISA = 0x00;
+    TRISB = 0x00;
+    TRISC = 0x00;
+    
+    PORTA = 0x00;
+    PORTB = 0x00;
+    PORTC = 0x00;
     
     /* Interrupt setup */
-    RCONbits.IPEN = 1;              /* Enable priority levels on interrupts   */
-    INTCONbits.PEIE = 1;            /* Enable all peripheral interrupts       */
-    INTCONbits.TMR0IF = 0;          /* Clear the interrupt flag               */
-    INTCONbits.TMR0IE = 1;          /* Enable TMR0 interrupt                  */
-    INTCON2bits.TMR0IP = 0;         /* Low interrupt priority                 */
+//    RCONbits.IPEN = 1;              /* Enable priority levels on interrupts   */
+//    INTCONbits.PEIE = 1;            /* Enable all peripheral interrupts       */
+//    INTCONbits.TMR0IF = 0;          /* Clear the interrupt flag               */
+//    INTCONbits.TMR0IE = 1;          /* Enable TMR0 interrupt                  */
+//    INTCON2bits.TMR0IP = 0;         /* Low interrupt priority                 */
     
     /* My own code setups */
-    setupTimer0(TIMER_MODE_WORK);
-    motor_setup();
+    //setupTimer0(TIMER_MODE_WORK);
+    //motor_setup();
+    D_UART_Init();
 //    fsm_setup();
 //    
     /* Enable stuff */
-    INTCONbits.GIEH = 1;            /* Enables all high-priority interrupts   */
-    INTCONbits.GIEL = 1;            /* Enable low interrupts                  */
+//    INTCONbits.GIEH = 1;            /* Enables all high-priority interrupts   */
+//    INTCONbits.GIEL = 1;            /* Enable low interrupts                  */
 }
 
 void setupTimer0(uint8_t mode) {
@@ -129,12 +135,27 @@ void goToSleep() {
 
 void main(void)
 {    
+    __delay_ms(100);
     initialize();
+    __delay_ms(100);
+    
+    D_UART_Enable(true);
+    
+    uint8_t count = 0;
 
     while(1)
     {
-        __delay_ms(100);
+        __delay_ms(1000);
         
+        D_UART_Write("Hallo ");
+        
+        if (test) {
+            LATBbits.LATB5 = 1;
+            test = false;
+        } else {
+            LATBbits.LATB5 = 0;
+            test = true;
+        }
 //        goToSleep();
         
 //        fsm_tick(); // TODO: do this on timer function
@@ -147,13 +168,7 @@ void __interrupt(low_priority) _LowInterruptManager (void)
     /* Check if TMR0 interrupt is enabled and if the interrupt flag is set */
     if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
     {
-//        if (test) {
-//            LATBbits.LATB5 = 1;
-//            test = false;
-//        } else {
-//            LATBbits.LATB5 = 0;
-//            test = true;
-//        }
+
         INTCONbits.TMR0IF = 0; /* clear the TMR0 interrupt flag */
     }
 }

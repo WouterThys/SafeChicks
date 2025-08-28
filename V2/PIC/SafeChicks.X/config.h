@@ -10,8 +10,15 @@
  ******************************************************************************/
 
 /* This file contains all pin mapping of the board */
-#define PIN_MOTOR_PWM PORTCbits.RC2     // Pin for motor PWM
-#define PIN_MOTOR_DIR PORTCbits.RC5     // Pin for motor direction
+#define MOTOR_PWM       PORTCbits.RC2     // Pin for motor PWM
+#define MOTOR_Dir       PORTCbits.RC5     // Pin for motor direction
+
+// Ports for UART
+#define UART_TX         PORTCbits.RC7
+#define UART_RX         PORTCbits.RC6
+    
+#define UART_TX_Dir     TRISCbits.TRISC7
+#define UART_RX_Dir     TRISCbits.TRISC6
 
 //const uint8_t   PIN_LSENSOR = 0; // Pin for reading light sensor
 //const uint8_t   PIN_BSENSOR = 0; // Pin for reading battery sensor
@@ -70,7 +77,7 @@ const uint16_t  THR_NIGHT = 200;  // Threshold used to switch from night->day (s
 /**
  * Baud rate of serial communication
  */
-#define SERIAL_BAUD 9600
+#define SERIAL_BAUD 1200
 
 
 

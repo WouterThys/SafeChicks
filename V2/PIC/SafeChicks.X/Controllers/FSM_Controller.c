@@ -1,8 +1,11 @@
 #include <stdbool.h>
 
-#include "fsm.h"
-#include "motor.h"
-#include "config.h"
+#include "FSM_Controller.h"
+
+#include "../Drivers/MOTOR_Driver.h"
+#include "../Drivers/UART_Driver.h"
+#include "../config.h"
+
 
 #define LOW_POWER 0 // TODO: (digitalRead(PIN_NOSLEEP) == LOW)
 

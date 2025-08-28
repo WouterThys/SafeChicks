@@ -1,5 +1,5 @@
-#include "motor.h"
-#include "config.h"
+#include "MOTOR_Driver.h"
+#include "../config.h"
 
 // Private stuff -----------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ void motor_setup() {
     T2CONbits.T2CKPS = 0b00; /* Pre-scaler is 1                               */
 
     PR2 = 0xFF;
-    setDutyPercent(0);
+    setDutyPercent(20);
 
     /* PWM mode */
     CCP1CONbits.CCP1M = 0b1100; /* PWM mode                                   */
@@ -49,9 +49,9 @@ void motor_setup() {
 void motor_start(Direction d) {
     dir = d;
     if (dir == Up) {
-        PIN_MOTOR_DIR = 1;
+        MOTOR_Dir = 1;
     } else {
-        PIN_MOTOR_DIR = 0;
+        MOTOR_Dir = 0;
     }
     while (pwm < MAX_MOTOR_SPEED) {
         pwm += 1;

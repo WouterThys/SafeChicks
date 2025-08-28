@@ -4,8 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>motor.h</itemPath>
-      <itemPath>fsm.h</itemPath>
+      <logicalFolder name="f2" displayName="Controllers" projectFiles="true">
+        <itemPath>Controllers/FSM_Controller.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="Drivers" projectFiles="true">
+        <itemPath>Drivers/UART_Driver.h</itemPath>
+        <itemPath>Drivers/MOTOR_Driver.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -21,11 +26,20 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f2" displayName="Controllers" projectFiles="true">
+        <itemPath>Controllers/FSM_Controller.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="Drivers" projectFiles="true">
+        <itemPath>Drivers/MOTOR_Driver.c</itemPath>
+        <itemPath>Drivers/UART_Driver.c</itemPath>
+      </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>motor.c</itemPath>
-      <itemPath>fsm.c</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>Drivers</Elem>
+    <Elem>Controllers</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
