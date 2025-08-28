@@ -6,8 +6,10 @@
 #include "../Drivers/UART_Driver.h"
 #include "../config.h"
 
-
-#define LOW_POWER 0 // TODO: (digitalRead(PIN_NOSLEEP) == LOW)
+#if DEBUG_MODE
+#include <stdio.h>
+#include <string.h>
+#endif
 
 /*******************************************************************************
  *                      Function and type definitions 
@@ -41,8 +43,11 @@ typedef struct {
     // Sensor values
     uint16_t lSensorValue; // Value of the light sensor
     uint16_t bSensorValue; // Battery sensor
-    bool uSensorClosed; // Value of the upper sensor, True when the sensor is closed
-    bool bSensorClosed; // Value of the bottom sensor, True when the sensor is closed
+    bool uSensorClosed; // Value of the upper sensor
+    bool bSensorClosed; // Value of the bottom sensor
+    bool uButtonPushed; // When UP button is pushed
+    bool dButtonPushed; // When DOWN button is pushed
+    // TODO: one big 'enabled' flag
 
     // Error
     uint16_t error; // Last found error value
@@ -65,7 +70,6 @@ static void state_execute(Fsm * fsm);
  * Print out debug information for the current FSM variables.
  * This should set all status LEDs and write data to the
  * serial interface if enabled. 
- * When the LOW_POWER is set, this will not write to the UART module.
  * @param fsm: pointer to the FSM
  */
 static void debug(Fsm * fsm);
@@ -95,7 +99,6 @@ static void state_Calculate(Fsm * fsm);
 /**
  * State function for State::Sleep
  * Takes down the whole FSM for certain time.
- * When in LOW_POWER mode the whole MCU will be put into sleep mode.
  * @param fsm
  */
 static void state_Sleep(Fsm * fsm);
@@ -128,26 +131,22 @@ static void state_MotorStop(Fsm * fsm);
 
 Fsm fsm;
 
+#if DEBUG_MODE
+#define DEBUG_BUFFER_SIZE 100
+char debugBuffer[DEBUG_BUFFER_SIZE];
+#endif
+
 /*******************************************************************************
  *                      Public function implementation 
  ******************************************************************************/
 
-void fsm_setup() {
-    //  if (!LOW_POWER) 
-    //  {
-    //    Serial.begin(9600);
-    //  }
-    //
-    //  // Pin control
-    //  pinMode(LED_BUILTIN, OUTPUT);
-    //  pinMode(PIN_DAY_STATE, OUTPUT);
-    //  pinMode(PIN_ERROR_STATE, OUTPUT);
-    //  
-    //  pinMode(PIN_LSENSOR, INPUT);
-    //  pinMode(PIN_BSENSOR, INPUT);
-    //  pinMode(PIN_USWITCH, INPUT);
-    //  pinMode(PIN_BSWITCH, INPUT);
-    //  pinMode(PIN_NOSLEEP, INPUT);
+void C_FSM_Init() {
+
+    //  Pin control
+    U_SENSOR_Dir    = 1;
+    B_SENSOR_Dir    = 1;
+    U_BUTTON_Dir    = 1;
+    D_BUTTON_Dir    = 1;
 
     // Setup the state
     fsm.state = Calculate;
@@ -158,17 +157,21 @@ void fsm_setup() {
     fsm.lSensorValue = 0;
     fsm.uSensorClosed = false;
     fsm.bSensorClosed = false;
+    fsm.uButtonPushed = false;
+    fsm.dButtonPushed = false;
     fsm.error = 0;
 }
 
 /* Run the FSM one time */
-void fsm_tick() {
-    fsm.epoch++;
+void C_FSM_Tick() {
+    
     fsm.state = fsm.next;
 
     read_input(&fsm);
     sanity_check(&fsm);
     state_execute(&fsm);
+
+    fsm.epoch++;
 }
 
 /*******************************************************************************
@@ -198,65 +201,21 @@ void state_execute(Fsm * fsm) {
 }
 
 void debug(Fsm * fsm) {
-    if (!LOW_POWER) {
-        //    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-        //    digitalWrite(PIN_ERROR_STATE, fsm.error > 0 ? HIGH : LOW);
-        //    digitalWrite(PIN_DAY_STATE, fsm.isDay() ? HIGH : LOW);
-        //
-        //    // Allocate the JSON document
-        //    JsonDocument doc;
-        //
-        //    // Add values in the document
-        //    doc["epoch"] = fsm.epoch;
-        //    doc["state"] = print_state(fsm.state);
-        //    doc["next"] = print_state(fsm.next);
-        //    doc["day"] = fsm.isDay();
-        //    doc["dayCount"] = fsm.dayCount;
-        //    doc["sleepCount"] = fsm.sleepCount;
-        //    doc["motorRunningCount"] = fsm.motorRunningCount;
-        //    doc["lSensorValue"] = fsm.lSensorValue;
-        //    doc["bSensorValue"] = fsm.bSensorValue;
-        //    doc["uSensorClosed"] = fsm.uSensorClosed;
-        //    doc["bSensorClosed"] = fsm.bSensorClosed;
-        //    doc["error"] = fsm.error;
-        //
-        //    // Note: Serial1 is on other connector. 
-        //    serializeJson(doc, Serial);
-        //    Serial.print("\n");
-
-        // Read from serial here?
-        //    if (Serial.available() > 0) 
-        //    {
-        //        // read the incoming byte:
-        //        char incomingByte = Serial.read();
-        //
-        //        switch(incomingByte) 
-        //        {
-        //          case 'U': 
-        //            fsm.day = true;
-        //            fsm.state = State::MotorRun;
-        //            Serial.println("Faking day");
-        //            break;
-        //          case 'D': 
-        //            fsm.day = false;
-        //            fsm.state = State::MotorRun;
-        //            Serial.println("Faking night");
-        //            break;
-        //          default:
-        //            Serial.print("Input unknown: ");
-        //            Serial.println(incomingByte);
-        //            break;
-        //        }
-
-        //        while (Serial.available() > 0) 
-        //        {
-        //          // Empty the buffer
-        //          Serial.read();
-        //        }
-        //    }
-
-        //    Serial.flush(); // Flush because we are going to sleep soon
+#if DEBUG_MODE
+    // Only check on multiples of 100 => every second
+    if (fsm->epoch % 100 == 0) {
+        
+        char state = ((char)fsm->state) + 48;
+        
+        snprintf(debugBuffer, DEBUG_BUFFER_SIZE, 
+                "%lu,%c.\r\n", 
+                fsm->epoch, 
+                state);
+        
+        D_UART_Write(debugBuffer);
+       
     }
+#endif // DEBUG_MODE
 }
 
 void sanity_check(Fsm * fsm) {
@@ -289,8 +248,11 @@ void sanity_check(Fsm * fsm) {
 void read_input(Fsm * fsm) {
     //  fsm.lSensorValue = analogRead(PIN_LSENSOR);
     //  fsm.bSensorValue = analogRead(PIN_BSENSOR);
-    //  fsm.uSensorClosed = digitalRead(PIN_USWITCH) == LOW;
-    //  fsm.bSensorClosed = digitalRead(PIN_BSWITCH) == LOW;
+    
+    fsm->uSensorClosed = U_SENSOR_Pin == 1;
+    fsm->bSensorClosed = B_SENSOR_Pin == 1;
+    fsm->uButtonPushed = U_BUTTON_Pin == 1;
+    fsm->dButtonPushed = D_BUTTON_Pin == 1;
 
     debug(fsm);
 }
@@ -333,11 +295,11 @@ void state_Calculate(Fsm * fsm) {
 
 void state_Sleep(Fsm * fsm) {
     /* Handle state */
-    if (LOW_POWER) {
-        //LowPower.deepSleep(SLEEP_TIME_MS);
-    } else {
-        __delay_ms(LOW_POWER_SLEEP_TIME_MS);
-    }
+//    if (LOW_POWER) {
+//        //LowPower.deepSleep(SLEEP_TIME_MS);
+//    } else {
+//        //__delay_ms(LOW_POWER_SLEEP_TIME_MS);
+//    }
     fsm->sleepCount++;
 
     /* Decide on next state */
@@ -383,8 +345,6 @@ void state_MotorRunning(Fsm * fsm) {
     } else {
         // Keep in the current state
         fsm->next = MotorRunning;
-        // TODO: sleep before checking again
-        __delay_ms(100);
     }
 }
 

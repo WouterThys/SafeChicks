@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=configuration.c main.c Drivers/MOTOR_Driver.c Drivers/UART_Driver.c Controllers/FSM_Controller.c
+SOURCEFILES_QUOTED_IF_SPACED=configuration.c Controllers/FSM_Controller.c Drivers/MOTOR_Driver.c Drivers/UART_Driver.c main.c Drivers/TRM0_Driver.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/configuration.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/Drivers/MOTOR_Driver.p1 ${OBJECTDIR}/Drivers/UART_Driver.p1 ${OBJECTDIR}/Controllers/FSM_Controller.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/configuration.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/Drivers/MOTOR_Driver.p1.d ${OBJECTDIR}/Drivers/UART_Driver.p1.d ${OBJECTDIR}/Controllers/FSM_Controller.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/configuration.p1 ${OBJECTDIR}/Controllers/FSM_Controller.p1 ${OBJECTDIR}/Drivers/MOTOR_Driver.p1 ${OBJECTDIR}/Drivers/UART_Driver.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/Drivers/TRM0_Driver.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/configuration.p1.d ${OBJECTDIR}/Controllers/FSM_Controller.p1.d ${OBJECTDIR}/Drivers/MOTOR_Driver.p1.d ${OBJECTDIR}/Drivers/UART_Driver.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/Drivers/TRM0_Driver.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/configuration.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/Drivers/MOTOR_Driver.p1 ${OBJECTDIR}/Drivers/UART_Driver.p1 ${OBJECTDIR}/Controllers/FSM_Controller.p1
+OBJECTFILES=${OBJECTDIR}/configuration.p1 ${OBJECTDIR}/Controllers/FSM_Controller.p1 ${OBJECTDIR}/Drivers/MOTOR_Driver.p1 ${OBJECTDIR}/Drivers/UART_Driver.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/Drivers/TRM0_Driver.p1
 
 # Source Files
-SOURCEFILES=configuration.c main.c Drivers/MOTOR_Driver.c Drivers/UART_Driver.c Controllers/FSM_Controller.c
+SOURCEFILES=configuration.c Controllers/FSM_Controller.c Drivers/MOTOR_Driver.c Drivers/UART_Driver.c main.c Drivers/TRM0_Driver.c
 
 
 
@@ -96,13 +96,13 @@ ${OBJECTDIR}/configuration.p1: configuration.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/configuration.d ${OBJECTDIR}/configuration.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/configuration.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main.p1.d 
-	@${RM} ${OBJECTDIR}/main.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit4   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/main.p1 main.c 
-	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+${OBJECTDIR}/Controllers/FSM_Controller.p1: Controllers/FSM_Controller.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/Controllers" 
+	@${RM} ${OBJECTDIR}/Controllers/FSM_Controller.p1.d 
+	@${RM} ${OBJECTDIR}/Controllers/FSM_Controller.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit4   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Controllers/FSM_Controller.p1 Controllers/FSM_Controller.c 
+	@-${MV} ${OBJECTDIR}/Controllers/FSM_Controller.d ${OBJECTDIR}/Controllers/FSM_Controller.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Controllers/FSM_Controller.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/Drivers/MOTOR_Driver.p1: Drivers/MOTOR_Driver.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/Drivers" 
@@ -120,13 +120,21 @@ ${OBJECTDIR}/Drivers/UART_Driver.p1: Drivers/UART_Driver.c  nbproject/Makefile-$
 	@-${MV} ${OBJECTDIR}/Drivers/UART_Driver.d ${OBJECTDIR}/Drivers/UART_Driver.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/Drivers/UART_Driver.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/Controllers/FSM_Controller.p1: Controllers/FSM_Controller.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}/Controllers" 
-	@${RM} ${OBJECTDIR}/Controllers/FSM_Controller.p1.d 
-	@${RM} ${OBJECTDIR}/Controllers/FSM_Controller.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit4   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Controllers/FSM_Controller.p1 Controllers/FSM_Controller.c 
-	@-${MV} ${OBJECTDIR}/Controllers/FSM_Controller.d ${OBJECTDIR}/Controllers/FSM_Controller.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/Controllers/FSM_Controller.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/main.p1.d 
+	@${RM} ${OBJECTDIR}/main.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit4   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/main.p1 main.c 
+	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/Drivers/TRM0_Driver.p1: Drivers/TRM0_Driver.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/Drivers" 
+	@${RM} ${OBJECTDIR}/Drivers/TRM0_Driver.p1.d 
+	@${RM} ${OBJECTDIR}/Drivers/TRM0_Driver.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit4   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Drivers/TRM0_Driver.p1 Drivers/TRM0_Driver.c 
+	@-${MV} ${OBJECTDIR}/Drivers/TRM0_Driver.d ${OBJECTDIR}/Drivers/TRM0_Driver.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Drivers/TRM0_Driver.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
 ${OBJECTDIR}/configuration.p1: configuration.c  nbproject/Makefile-${CND_CONF}.mk 
@@ -137,13 +145,13 @@ ${OBJECTDIR}/configuration.p1: configuration.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/configuration.d ${OBJECTDIR}/configuration.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/configuration.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main.p1.d 
-	@${RM} ${OBJECTDIR}/main.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/main.p1 main.c 
-	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+${OBJECTDIR}/Controllers/FSM_Controller.p1: Controllers/FSM_Controller.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/Controllers" 
+	@${RM} ${OBJECTDIR}/Controllers/FSM_Controller.p1.d 
+	@${RM} ${OBJECTDIR}/Controllers/FSM_Controller.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Controllers/FSM_Controller.p1 Controllers/FSM_Controller.c 
+	@-${MV} ${OBJECTDIR}/Controllers/FSM_Controller.d ${OBJECTDIR}/Controllers/FSM_Controller.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Controllers/FSM_Controller.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/Drivers/MOTOR_Driver.p1: Drivers/MOTOR_Driver.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/Drivers" 
@@ -161,13 +169,21 @@ ${OBJECTDIR}/Drivers/UART_Driver.p1: Drivers/UART_Driver.c  nbproject/Makefile-$
 	@-${MV} ${OBJECTDIR}/Drivers/UART_Driver.d ${OBJECTDIR}/Drivers/UART_Driver.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/Drivers/UART_Driver.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/Controllers/FSM_Controller.p1: Controllers/FSM_Controller.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}/Controllers" 
-	@${RM} ${OBJECTDIR}/Controllers/FSM_Controller.p1.d 
-	@${RM} ${OBJECTDIR}/Controllers/FSM_Controller.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Controllers/FSM_Controller.p1 Controllers/FSM_Controller.c 
-	@-${MV} ${OBJECTDIR}/Controllers/FSM_Controller.d ${OBJECTDIR}/Controllers/FSM_Controller.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/Controllers/FSM_Controller.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/main.p1.d 
+	@${RM} ${OBJECTDIR}/main.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/main.p1 main.c 
+	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/Drivers/TRM0_Driver.p1: Drivers/TRM0_Driver.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/Drivers" 
+	@${RM} ${OBJECTDIR}/Drivers/TRM0_Driver.p1.d 
+	@${RM} ${OBJECTDIR}/Drivers/TRM0_Driver.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Drivers/TRM0_Driver.p1 Drivers/TRM0_Driver.c 
+	@-${MV} ${OBJECTDIR}/Drivers/TRM0_Driver.d ${OBJECTDIR}/Drivers/TRM0_Driver.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Drivers/TRM0_Driver.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

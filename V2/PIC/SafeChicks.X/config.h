@@ -4,6 +4,7 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 
 #define _XTAL_FREQ 1000000UL /* 1 MHz clock */
+#define DEBUG_MODE 0
 
 /*******************************************************************************
  *                      PIN MAPPING 
@@ -12,6 +13,20 @@
 /* This file contains all pin mapping of the board */
 #define MOTOR_PWM       PORTCbits.RC2     // Pin for motor PWM
 #define MOTOR_Dir       PORTCbits.RC5     // Pin for motor direction
+
+// Switched and buttons
+#define U_SENSOR_Pin    PORTBbits.RB0
+#define U_SENSOR_Dir    TRISBbits.TRISB0
+
+#define B_SENSOR_Pin    PORTBbits.RB1
+#define B_SENSOR_Dir    TRISBbits.TRISB1
+
+#define U_BUTTON_Pin    PORTBbits.RB2
+#define U_BUTTON_Dir    TRISBbits.TRISB2
+
+#define D_BUTTON_Pin    PORTBbits.RB3
+#define D_BUTTON_Dir    TRISBbits.TRISB3
+
 
 // Ports for UART
 #define UART_TX         PORTCbits.RC7

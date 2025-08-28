@@ -1,5 +1,5 @@
-#ifndef XC_HEADER_TEMPLATE_H
-#define	XC_HEADER_TEMPLATE_H
+#ifndef MOTOR_DRIVER_H
+#define	MOTOR_DRIVER_H
 
 /* This file contains all the motor functions */
 
@@ -9,7 +9,7 @@ typedef enum {
 } Direction;
 
 /**
- * Initialize the motor control
+ * Initialise the motor control
  */
 void motor_setup();
 
@@ -24,5 +24,5 @@ void motor_start(Direction d);
 void motor_stop();
 
 
-#endif	/* XC_HEADER_TEMPLATE_H */
+#endif	/* MOTOR_DRIVER_H */
 

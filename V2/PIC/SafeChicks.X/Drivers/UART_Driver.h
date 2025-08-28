@@ -2,7 +2,6 @@
 #define	UART_DRIVER_H
     
 #include <stdbool.h>
-#include <stdint.h>
     
 /**
 * Initializes all the parameters to the default setting, as well as writing the
@@ -13,16 +12,9 @@ void D_UART_Init();
 
 /**
  * Write data to the TX pin of UART module. 
- * @param data: Date string to write
+ * @param data: Date string to write, should be 0 terminalted!
  */
 void D_UART_Write(const char* data);
-
-/**
- * Write integer to the TX pin of UART module.
- * @param command: Command
- * @param d: Integer to write
- */
-void D_UART_WriteInt(const char* command, int d);
 
 ///**
 // * Read data from the RX pin of UART module.

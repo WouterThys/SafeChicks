@@ -1,15 +1,15 @@
-#ifndef FSM_H
-#define	FSM_H
+#ifndef FSM_CONTROLLER_H
+#define	FSM_CONTROLLER_H
 
 /* This file contains all Finite State Machine functions */
 
 
   
 /* Initialize the FSM */
-void fsm_setup();
+void C_FSM_Init();
 
 /* Run the FSM one time */
-void fsm_tick();
+void C_FSM_Tick();
 
-#endif	/* FSM_H */
+#endif	/* FSM_CONTROLLER_H */
 
