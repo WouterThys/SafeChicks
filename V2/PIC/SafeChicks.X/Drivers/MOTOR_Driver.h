@@ -13,7 +13,7 @@ typedef enum {
 /**
  * Initialise the motor control
  */
-void D_MOTOR_Init();
+void D_MOTOR_Init(void);
 
 /**
  * Run the motor in a direction and speed.

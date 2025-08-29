@@ -4,6 +4,7 @@
 
 #include "../Drivers/MOTOR_Driver.h"
 #include "../Drivers/UART_Driver.h"
+#include "../Drivers/ADC_Driver.h"
 #include "../config.h"
 
 #if DEBUG_MODE
@@ -172,7 +173,7 @@ char debugBuffer[DEBUG_BUFFER_SIZE];
  *                      Public function implementation 
  ******************************************************************************/
 
-void C_FSM_Init() {
+void C_FSM_Init(void) {
 
     //  Pin control
     U_SENSOR_Dir = 1;
@@ -196,7 +197,7 @@ void C_FSM_Init() {
 }
 
 /* Run the FSM one time */
-void C_FSM_Tick() {
+void C_FSM_Tick(void) {
 
     fsm.state = fsm.next;
 
@@ -214,23 +215,23 @@ void C_FSM_Tick() {
 
 void debug(Fsm * fsm) {
     
-//    if (isDay(fsm)) {
-//        LED_BLUE_Pin = 1;
-//    } else {
-//        LED_BLUE_Pin = 0;
-//    }
-//    
-//    if (fsm->error != 0) {
-//        LED_RED_Pin = 1;
-//    } else {
-//        LED_RED_Pin = 0;
-//    }
+    if (isDay(fsm)) {
+        LED_BLUE_Pin = 1;
+    } else {
+        LED_BLUE_Pin = 0;
+    }
     
-    if (fsm->uButtonPushed || fsm->dButtonPushed) {
+    if (fsm->error != 0) {
         LED_RED_Pin = 1;
     } else {
         LED_RED_Pin = 0;
     }
+    
+//    if (fsm->uButtonPushed || fsm->dButtonPushed) {
+//        LED_RED_Pin = 1;
+//    } else {
+//        LED_RED_Pin = 0;
+//    }
 
 #if DEBUG_MODE
     // Only check on multiples of 100 => every second
@@ -250,8 +251,8 @@ void debug(Fsm * fsm) {
 }
 
 void read_input(Fsm * fsm) {
-    //  fsm.lSensorValue = analogRead(PIN_LSENSOR);
-    //  fsm.bSensorValue = analogRead(PIN_BSENSOR);
+    
+    fsm->lSensorValue = D_ADC_ReadOnce();
 
     fsm->uSensorClosed = U_SENSOR_Pin == 1;
     fsm->bSensorClosed = B_SENSOR_Pin == 1;
@@ -331,11 +332,9 @@ void state_execute(Fsm * fsm) {
 
 void state_Calculate(Fsm * fsm) {
     bool changed = false;
-    LED_BLUE_Pin = 0;
-    /* Handle state */
 
-    /* Analog sensor value */
-    if (fsm->lSensorValue < THR_NIGHT) {
+    /* Handle state */
+    if (fsm->lSensorValue < NIGHT_THRESHOLD) {
         // Reading a nighttime value
         if (fsm->dayCount == 0) {
             // Counted enough nighttime values -> update
@@ -348,7 +347,7 @@ void state_Calculate(Fsm * fsm) {
             changed = false;
             fsm->dayCount--;
         }
-    } else if (fsm->lSensorValue > THR_DAY) {
+    } else if (fsm->lSensorValue > DAY_THRESHOLD) {
         // Reading a daytime values
         if (fsm->dayCount >= THR_DN_COUNT) {
             // Counted enough daytime values -> update

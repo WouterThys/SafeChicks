@@ -5,7 +5,6 @@
 #include <string.h>
 
 #include "../config.h"
-//#include "PORT_Driver.h"
 #include "UART_Driver.h"
 
 /*******************************************************************************
@@ -29,7 +28,7 @@ uint8_t baud;
 /*******************************************************************************
  *          DRIVER FUNCTIONS
  ******************************************************************************/
-void D_UART_Init() {  
+void D_UART_Init(void) {  
     
     // Disable UART while initialising
     D_UART_Enable(false);

@@ -11,6 +11,7 @@
         <itemPath>Drivers/UART_Driver.h</itemPath>
         <itemPath>Drivers/MOTOR_Driver.h</itemPath>
         <itemPath>Drivers/TMR0_Driver.h</itemPath>
+        <itemPath>Drivers/ADC_Driver.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -34,6 +35,7 @@
         <itemPath>Drivers/MOTOR_Driver.c</itemPath>
         <itemPath>Drivers/UART_Driver.c</itemPath>
         <itemPath>Drivers/TRM0_Driver.c</itemPath>
+        <itemPath>Drivers/ADC_Driver.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>

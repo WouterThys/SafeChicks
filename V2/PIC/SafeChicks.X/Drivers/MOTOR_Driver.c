@@ -5,7 +5,7 @@
 
 // Public stuff -----------------------------------------------------------------------------
 
-void D_MOTOR_Init() {
+void D_MOTOR_Init(void) {
     
     MOTOR_DIR_Dir = 0;
 

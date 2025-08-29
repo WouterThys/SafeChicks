@@ -52,16 +52,9 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 #define SECONDS_IN_MINUTE 60
 #define MILLIS_IN_SECOND  1000
 
-const uint16_t  THR_DAY = 200;    // Threshold used to switch from day->night (sensor is max 1023)
-const uint16_t  THR_NIGHT = 200;  // Threshold used to switch from night->day (sensor is max 1023)
-
- /* Low power sleep time in sleep state */
-#define  SLEEP_TIME_MS      ((1 * SECONDS_IN_MINUTE * MILLIS_IN_SECOND) - FSM_PERIOD_MS)
-
-/* Delays between PWM update values, 
- * PWM will go from 0 to 100, 
- * making the total ramp time PWM_DELAY_MS x 100 */
-#define  PWM_DELAY_MS       10
+/* Threshold used to switch from day->night (sensor is max 1023) */
+#define DAY_THRESHOLD     200
+#define NIGHT_THRESHOLD   200
 
 /* When not in LOW_POWER (see LowPower switch) we don't go to sleep, 
  * but use this delay to fake a sleep time */

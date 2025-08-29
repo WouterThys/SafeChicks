@@ -6,10 +6,10 @@
 
   
 /* Initialize the FSM */
-void C_FSM_Init();
+void C_FSM_Init(void);
 
 /* Run the FSM one time */
-void C_FSM_Tick();
+void C_FSM_Tick(void);
 
 #endif	/* FSM_CONTROLLER_H */
 

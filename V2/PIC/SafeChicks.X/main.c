@@ -1,11 +1,13 @@
 #include <xc.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "config.h"
 
 #include "Drivers/TMR0_Driver.h"
 #include "Drivers/MOTOR_Driver.h"
 #include "Drivers/UART_Driver.h"
+#include "Drivers/ADC_Driver.h"
 #include "Controllers/FSM_Controller.h"
 
 /*******************************************************************************
@@ -25,13 +27,13 @@
  * Will enable all timers and interrupts for other peripherals to work.
  * Enables the FSM, Motor, ... code
  */
-static void initialize();
+static void initialize(void);
 
 /**
  * Enters the MCU in sleep mode.
  * This will update the Timer0 values to go for a long sleep
  */
-static void goToSleep();
+static void goToSleep(void);
 
 /*******************************************************************************
  *                      Variables 
@@ -43,7 +45,7 @@ volatile bool runFSM = false;
  *                      Function implementation 
  ******************************************************************************/
 
-void initialize() 
+void initialize(void) 
 {
     /* Oscillators setup */
     OSCCONbits.IRCF = 0b100;        /* 1MHz */
@@ -68,6 +70,7 @@ void initialize()
     D_TMR0_Init(TIMER_MODE_WORK);
     D_MOTOR_Init();
     D_UART_Init();
+    D_ADC_Init();
     C_FSM_Init();
     
     /* Enable stuff */
@@ -77,7 +80,7 @@ void initialize()
     INTCONbits.GIEL = 1;            /* Enable low interrupts                  */
 }
 
-void goToSleep() {
+void goToSleep(void) {
     
     /**
      * We will need peripheral clock so go to RC_IDLE mode on SLEEP
@@ -103,24 +106,13 @@ void main(void)
     __delay_ms(100);
 
     while(1)
-{
+    {
         if (runFSM) {
             runFSM = false;
             C_FSM_Tick();
         }
         
-        
-        
-//        if (test) {
-//            LATBbits.LATB5 = 1;
-//            test = false;
-//        } else {
-//            LATBbits.LATB5 = 0;
-//            test = true;
-//        }
 //        goToSleep();
-        
-//        fsm_tick(); // TODO: do this on timer function
 
     }
 }

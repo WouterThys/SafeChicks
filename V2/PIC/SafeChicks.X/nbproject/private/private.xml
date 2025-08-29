@@ -4,9 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/source/repos/SafeChicks/V2/PIC/SafeChicks.X/main.c</file>
-            <file>file:/D:/source/repos/SafeChicks/V2/PIC/SafeChicks.X/Drivers/MOTOR_Driver.h</file>
-            <file>file:/D:/source/repos/SafeChicks/V2/PIC/SafeChicks.X/Drivers/MOTOR_Driver.c</file>
-            <file>file:/D:/source/repos/SafeChicks/V2/PIC/SafeChicks.X/Controllers/FSM_Controller.h</file>
+            <file>file:/D:/source/repos/SafeChicks/V2/PIC/SafeChicks.X/config.h</file>
             <file>file:/D:/source/repos/SafeChicks/V2/PIC/SafeChicks.X/Controllers/FSM_Controller.c</file>
         </group>
     </open-files>

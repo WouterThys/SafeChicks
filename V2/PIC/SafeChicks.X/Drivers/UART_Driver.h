@@ -8,7 +8,7 @@
 * tri-state registers. Initializes the UART to the default data rate and settings.
  * Baud rate is configured in the config.h file.
 */
-void D_UART_Init();
+void D_UART_Init(void);
 
 /**
  * Write data to the TX pin of UART module. 
