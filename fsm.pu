@@ -2,26 +2,45 @@
 
 note "When daytime:\n -> D=1, Su=1, Sd=0\n\nWhen nighttime:\n -> D=0,Su=0,Sd=1" as N1
 
+Calculate : Store Calculate values in state
+Calculate : Sanity check Calculate values
 Sleep : sleep 5 min
 MotorStop : stop motor
-MotorRun : start motor up/down
-MotorCheck : day -> upper sensor should be on
-MotorCheck : night -> bottom sensor should be on
+MotorStart : start motor up/down
+MotorRunning : day -> upper sensor should be on
+MotorRunning : night -> bottom sensor should be on
+ForceUp : force the motor up
+ForceUp : while button is pressed
+ForceDown : force the motor up
+ForceDown : while button is pressed
 
-[*] --> Sensor
-Sensor : Store sensor values in state
-Sensor : Sanity check sensor values
+state start  <<start>>
+state btn_u  <<start>>
+state btn_d  <<start>>
 
-Sensor --> Sleep : day/night **not** changed
-Sleep --> Sensor : Wake up
-Sensor --> MotorRun : **changed**
+start --> Calculate
 
-MotorRun --> MotorCheck
+Calculate --> Sleep : day/night **not** changed
+Sleep --> Calculate : Wake up
+Calculate --> MotorStart : **day/night changed**
 
-MotorCheck --> MotorCheck : sensor **not** end
-MotorCheck --> MotorStop : sensor **end**
+MotorStart --> MotorRunning
 
-MotorStop --> Sensor
+MotorRunning --> MotorRunning : Calculate **not** end
+MotorRunning --> MotorStop : Calculate **end**
+
+MotorStop --> Calculate
+
+ForceUp --> Calculate : UP Btn released
+
+ForceDown --> Calculate : Down Btn released
+
+
+btn_u --> ForceUp : UP Btn pushed
+ForceUp --> ForceUp
+
+btn_d --> ForceDown : Down Btn pushed
+ForceDown --> ForceDown
 
 		
 @enduml

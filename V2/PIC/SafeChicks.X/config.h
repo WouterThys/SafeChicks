@@ -12,21 +12,24 @@
 
 /* This file contains all pin mapping of the board */
 #define MOTOR_PWM       PORTCbits.RC2     // Pin for motor PWM
-#define MOTOR_Dir       PORTCbits.RC5     // Pin for motor direction
+#define MOTOR_DIR_Pin   PORTCbits.RC1     // Pin for motor direction
+#define MOTOR_DIR_Dir   TRISCbits.RC1     // Pin for motor direction
 
 // Switched and buttons
 #define U_SENSOR_Pin    PORTBbits.RB0
 #define U_SENSOR_Dir    TRISBbits.TRISB0
-
 #define B_SENSOR_Pin    PORTBbits.RB1
 #define B_SENSOR_Dir    TRISBbits.TRISB1
-
 #define U_BUTTON_Pin    PORTBbits.RB2
 #define U_BUTTON_Dir    TRISBbits.TRISB2
-
 #define D_BUTTON_Pin    PORTBbits.RB3
 #define D_BUTTON_Dir    TRISBbits.TRISB3
 
+// LEDs
+#define LED_BLUE_Pin    PORTBbits.RB4
+#define LED_BLUE_Dir    TRISBbits.TRISB4
+#define LED_RED_Pin     PORTBbits.RB5
+#define LED_RED_Dir     TRISBbits.TRISB5
 
 // Ports for UART
 #define UART_TX         PORTCbits.RC7
@@ -34,15 +37,6 @@
     
 #define UART_TX_Dir     TRISCbits.TRISC7
 #define UART_RX_Dir     TRISCbits.TRISC6
-
-//const uint8_t   PIN_LSENSOR = 0; // Pin for reading light sensor
-//const uint8_t   PIN_BSENSOR = 0; // Pin for reading battery sensor
-//const uint8_t   PIN_USWITCH = 7; // Pin for reading upper door sensor
-//const uint8_t   PIN_BSWITCH = 8; // Pin for reading bottom door sensor
-//const uint8_t   PIN_NOSLEEP = 6; // When this pin is up, don't sleep (and keep COMx open)
-//
-//const uint8_t   PIN_DAY_STATE = 5; // Pin to connect to LED indicating day / night
-//const uint8_t   PIN_ERROR_STATE = 4; // Pin to connect to LED indicating error
 
 /*******************************************************************************
  *                      ERROR CODES 

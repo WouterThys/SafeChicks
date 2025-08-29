@@ -66,10 +66,10 @@ void initialize()
     
     /* My own code setups */
     D_TMR0_Init(TIMER_MODE_WORK);
-    //motor_setup();
+    D_MOTOR_Init();
     D_UART_Init();
     C_FSM_Init();
-//    
+    
     /* Enable stuff */
     D_TMR0_Enable(true);
     D_UART_Enable(true);
@@ -103,12 +103,10 @@ void main(void)
     __delay_ms(100);
 
     while(1)
-    {
+{
         if (runFSM) {
-            LATBbits.LATB5 = 1;
             runFSM = false;
             C_FSM_Tick();
-            LATBbits.LATB5 = 0;
         }
         
         

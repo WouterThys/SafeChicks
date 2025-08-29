@@ -1,6 +1,8 @@
 #ifndef MOTOR_DRIVER_H
 #define	MOTOR_DRIVER_H
 
+#include <stdint.h>
+
 /* This file contains all the motor functions */
 
 typedef enum {
@@ -11,17 +13,14 @@ typedef enum {
 /**
  * Initialise the motor control
  */
-void motor_setup();
+void D_MOTOR_Init();
 
 /**
- * Start the motor, which will ramp up to 100%
+ * Run the motor in a direction and speed.
+ * @param d: direction to run
+ * @param speed: speed in percent
  */
-void motor_start(Direction d);
-
-/**
- * Stop the motor, which will ramp down to 0%
- */
-void motor_stop();
+void D_MOTOR_Run(Direction d, uint8_t speed);
 
 
 #endif	/* MOTOR_DRIVER_H */
