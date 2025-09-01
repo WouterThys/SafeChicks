@@ -39,9 +39,9 @@ void D_MOTOR_Run(Direction d, uint8_t speed) {
         }
         
         if (d == Up) {
-            MOTOR_DIR_Pin = 1;
+            MOTOR_DIR_Pin = CW_DIRECTION;
         } else {
-            MOTOR_DIR_Pin = 0;
+            MOTOR_DIR_Pin = CCW_DIRECTION;
         }
 
         // PWM duty is 10-bit value

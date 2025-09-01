@@ -45,7 +45,7 @@ typedef struct {
     // Motor parameters
     Direction motorDir; // Up or down
     uint8_t motorSpeed; // The speed of the motor in percentage
-    uint16_t motorRunningCount; // Counter keeping how long the motor was running
+    uint32_t motorRunningCount; // Counter keeping how long the motor was running
 
     // Sensor values
     uint16_t lSensorValue; // Value of the light sensor
@@ -227,22 +227,19 @@ void debug(Fsm * fsm) {
         LED_RED_Pin = 0;
     }
     
-//    if (fsm->uButtonPushed || fsm->dButtonPushed) {
-//        LED_RED_Pin = 1;
-//    } else {
-//        LED_RED_Pin = 0;
-//    }
+    // TODO: advanced blinking patterns?
 
 #if DEBUG_MODE
     // Only check on multiples of 100 => every second
-    if (fsm->epoch % 100 == 0) {
+    if (fsm->epoch >= 100 && fsm->state <= Sleep) {
 
+        fsm->epoch = 0;
+        
         char state = ((char) fsm->state) + 48;
 
         snprintf(debugBuffer, DEBUG_BUFFER_SIZE,
-                "%lu,%c.\r\n",
-                fsm->epoch,
-                state);
+                "%c,%hu\r\n",
+                state, fsm->error);
 
         D_UART_Write(debugBuffer);
 

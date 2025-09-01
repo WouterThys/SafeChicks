@@ -60,15 +60,13 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
  * but use this delay to fake a sleep time */
 #define  LOW_POWER_SLEEP_TIME_MS 10000
 
-/* Total time (consequent) day/night reading will need to trigger is SLEEP_TIME_MS x THR_SLEEP_COUNT x THR_DN_COUNT */
-/* ===> With these values this is 1min x 5 x 3 = 15 min */
 #define   THR_SLEEP_COUNT   5   /* The total sleep time will be SLEEP_TIME_MS times this value, to allow shorter wakeup intervals for sanity checking */
 #define   THR_DN_COUNT      3   /* Hysteresis counter, depending on time between sleeps this makes how long day/night should be read before changing */
 
-/* Total time the motor should be running, this is counted every FSM_PERIOD_MS times.*/
-/* ===> With these values this is 100ms x 50 = 5s */
-#define   MAX_MOTOR_COUNT   50  /* The max count the motor should be running. */
+#define   MAX_MOTOR_COUNT   1000/* The max count the motor should be running. */
 #define   MAX_MOTOR_SPEED   100 /* PWM percentage                             */
+#define   CCW_DIRECTION     1   /* Counter clockwise direction                */
+#define   CW_DIRECTION      0   /* Clockwise direction                */
 
 
 
