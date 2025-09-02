@@ -56,9 +56,10 @@ void D_MOTOR_Run(Direction d, uint8_t speed) {
         // Enable
         CCP1CONbits.CCP1M = 0b1100;     /* PWM mode enabled                   */
     } else {
-        CCP1CONbits.CCP1M = 0b0000;     /* PWM mode off                       */
         CCPR1L = 0x00;
         CCP1CONbits.DC1B = 0b00;
+        CCP1CONbits.CCP1M = 0b0000;     /* PWM mode off                       */
+        MOTOR_PWM_Pin = 0;
     }
 }
 

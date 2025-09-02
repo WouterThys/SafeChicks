@@ -52,7 +52,7 @@ typedef struct {
     uint16_t lSensorValue; // Value of the light sensor
     uint16_t bSensorValue; // Battery sensor
     bool uSensorClosed; // Value of the upper sensor
-    bool bSensorClosed; // Value of the bottom sensor
+    bool lSwitchClosed; // Value of the upper limit switch
     bool uButtonPushed; // When UP button is pushed
     bool dButtonPushed; // When DOWN button is pushed
     // TODO: one big 'enabled' flag
@@ -65,7 +65,8 @@ typedef struct {
 #define isDay(fsm)          (fsm->day)
 #define isNight(fsm)        (!(isDay(fsm)))
 #define isDoorOpen(fsm)     (fsm->uSensorClosed)
-#define isDoorClosed(fsm)   (fsm->bSensorClosed)
+#define isDoorClosed(fsm)   (fsm->motorRunningCount > MOTOR_DOWN_FULL_CNT)
+#define isLimitSwitch(fsm)  (fsm->lSwitchClosed)
 #define isDirUp(fsm)        (fsm->motorDir == Up)
 #define isDirDown(fsm)      (fsm->motorDir == Down)
 
@@ -175,6 +176,7 @@ static void state_ForceDown(Fsm * fsm);
  ******************************************************************************/
 
 Fsm fsm;
+SleepHandler sleepHandler;
 
 #if DEBUG_MODE
 #define DEBUG_BUFFER_SIZE 100
@@ -185,24 +187,26 @@ char debugBuffer[DEBUG_BUFFER_SIZE];
  *                      Public function implementation 
  ******************************************************************************/
 
-void C_FSM_Init(void) {
+void C_FSM_Init(SleepHandler handler) {
 
-    //  Pin control
+    sleepHandler = handler;
+    
+    //  Pin control1
     U_SENSOR_Dir = 1;
-    B_SENSOR_Dir = 1;
+    L_SWITCH_Dir = 1;
     U_BUTTON_Dir = 1;
     D_BUTTON_Dir = 1;
 
     // Setup the state
     fsm.state = Calculate;
     fsm.next = Calculate;
-    fsm.dayCount = THR_DN_COUNT; // Probably install while day? 
+    fsm.dayCount = DAY_COUNT; // Probably install while day? 
     fsm.sleepCount = 0;
     fsm.motorSpeed = 0;
     fsm.motorRunningCount = 0;
     fsm.lSensorValue = 0;
     fsm.uSensorClosed = false;
-    fsm.bSensorClosed = false;
+    fsm.lSwitchClosed = false;
     fsm.uButtonPushed = false;
     fsm.dButtonPushed = false;
     fsm.error = 0;
@@ -250,8 +254,10 @@ void debug(Fsm * fsm) {
         char state = ((char) fsm->state) + 48;
 
         snprintf(debugBuffer, DEBUG_BUFFER_SIZE,
-                "%c,%hu\r\n",
-                state, fsm->error);
+                "%c,%" PRIu32 ",%" PRIu16 "\r\n",
+                state,
+                fsm->motorRunningCount,
+                fsm->error);
 
         D_UART_Write(debugBuffer);
 
@@ -264,7 +270,7 @@ void read_input(Fsm * fsm) {
     fsm->lSensorValue = D_ADC_ReadOnce();
 
     fsm->uSensorClosed = U_SENSOR_Pin == 1;
-    fsm->bSensorClosed = B_SENSOR_Pin == 1;
+    fsm->lSwitchClosed = L_SWITCH_Pin == 1;
     fsm->uButtonPushed = U_BUTTON_Pin == 1;
     fsm->dButtonPushed = D_BUTTON_Pin == 1;
 
@@ -274,26 +280,22 @@ void read_input(Fsm * fsm) {
 void sanity_check(Fsm * fsm) {
     fsm->error = 0;
 
-    // Bot sensors cannot be on
-    if (isDoorOpen(fsm) && isDoorClosed(fsm)) {
-        fsm->error = ERROR_SENSORS_BOTH_CLOSED;
-    }
     if (isDoorOpen(fsm) && isNight(fsm)) {
         fsm->error |= ERROR_SENSORS_UP_WHILE_NIGHT;
     }
-    if (isDoorClosed(fsm) && isDay(fsm)) {
-        fsm->error |= ERROR_SENSORS_DOWN_WHILE_DAY;
-    }
     if (fsm->motorRunningCount >= MAX_MOTOR_COUNT) {
-        // It is back OK..
-        if ((isDoorOpen(fsm) && isDay(fsm)) ||
-                (isDoorClosed(fsm) && isNight(fsm))) {
-            // Clear
-            fsm->motorRunningCount = 0;
-        }
-
-        // Set error at least once, if cleared will not show again
         fsm->error |= ERROR_MOTOR_RUN_TOO_LONG;
+    }
+    if (isLimitSwitch(fsm)) {
+        // Stop unless moving down
+        fsm->error |= ERROR_LIMIT_SWITCH_CLOSED;
+        
+        if (fsm->motorDir == Up) {
+            fsm->motorSpeed = 0;
+            D_MOTOR_Run(fsm->motorDir, fsm->motorSpeed);
+            fsm->state = MotorStop;
+            fsm->next = MotorStop;
+        }
     }
 
 }
@@ -351,19 +353,21 @@ void state_Calculate(Fsm * fsm) {
             fsm->day = false;
             fsm->motorDir = Down;
             fsm->motorSpeed = 0;
+            fsm->motorRunningCount = 0;
         } else {
             changed = false;
             fsm->dayCount--;
         }
     } else if (fsm->lSensorValue > DAY_THRESHOLD) {
         // Reading a daytime values
-        if (fsm->dayCount >= THR_DN_COUNT) {
+        if (fsm->dayCount >= DAY_COUNT) {
             // Counted enough daytime values -> update
             // Note: we get here all the time so only set changed flag when needed
             changed = !fsm->day;
             fsm->day = true;
             fsm->motorDir = Up;
             fsm->motorSpeed = 0;
+            fsm->motorRunningCount = 0;
         } else {
             changed = false;
             fsm->dayCount++;
@@ -380,15 +384,11 @@ void state_Calculate(Fsm * fsm) {
 
 void state_Sleep(Fsm * fsm) {
     /* Handle state */
-    //    if (LOW_POWER) {
-    //        //LowPower.deepSleep(SLEEP_TIME_MS);
-    //    } else {
-    //        //__delay_ms(LOW_POWER_SLEEP_TIME_MS);
-    //    }
+    sleepHandler();
     fsm->sleepCount++;
 
     /* Decide on next state */
-    if (fsm->sleepCount >= THR_SLEEP_COUNT) {
+    if (fsm->sleepCount >= SLEEP_COUNT) {
         fsm->sleepCount = 0;
         // Wake up
         fsm->next = Calculate;
@@ -401,7 +401,7 @@ void state_Sleep(Fsm * fsm) {
 void state_MotorStart(Fsm * fsm) {
     /* Handle state */
 
-    fsm->motorRunningCount = 0;
+    fsm->motorRunningCount++;
     bool stopNow = false;
 
     if (fsm->motorDir == Up && isDoorOpen(fsm)) {
@@ -419,6 +419,7 @@ void state_MotorStart(Fsm * fsm) {
         fsm->next = MotorStop;
     } else if (fsm->motorSpeed > MOTOR_FULL_SPEED) {
         /* Ramped up, go to running state */
+        fsm->motorRunningCount = 0;
         fsm->next = MotorRunning;
     } else {
         /* Still ramping */
@@ -434,20 +435,34 @@ void state_MotorRunning(Fsm * fsm) {
     if (fsm->motorRunningCount > MAX_MOTOR_COUNT) {
         // Something went wrong. Stop
         fsm->next = MotorStop;
-    } else 
-        if ((isDirUp(fsm) && isDoorOpen(fsm)) || // Opening door, upper sensor sees the door!
-            (isDirDown(fsm) && isDoorClosed(fsm)) // Closing door, bottom sensor sees the door!
-            ) {
-        // Start slowing down and check when sensor goes out again
-        fsm->next = MotorSlow;
-    } else {
-        // Keep in the current state
-        fsm->next = MotorRunning;
+        return;
     }
+    if (isDirUp(fsm)) {
+        // Slow down when upper sensor is seen. 
+        if (isDoorOpen(fsm)) {
+            fsm->motorRunningCount = 0;
+            fsm->next = MotorSlow;
+            return;
+        }
+    }
+    if (isDirDown(fsm)) {
+        // Slow down after a certain period of time
+        if (isDoorClosed(fsm)) {
+            fsm->motorRunningCount = 0;
+            fsm->next = MotorSlow;
+            return;
+        }
+    }
+
+    // Keep in the current state
+    fsm->next = MotorRunning;
+
 }
 
 void state_MotorSlow(Fsm * fsm) {
     /* Handle state */
+
+    fsm->motorRunningCount++;
 
     // Slow down to half%
     if (fsm->motorSpeed > MOTOR_HALF_SPEED) {
@@ -456,15 +471,24 @@ void state_MotorSlow(Fsm * fsm) {
     }
 
     /* Decide on next state */
-    if ((isDirUp(fsm) && !isDoorOpen(fsm)) || // Opening door, upper sensor goes out again
-            (isDirDown(fsm) && !isDoorClosed(fsm)) // Closing door, bottom sensor goes out again
-            ) {
-        // Ready to really stop now
-        fsm->next = MotorStop;
-    } else {
-        // Keep going
-        fsm->next = MotorSlow;
+    if (isDirUp(fsm)) {
+        // Opening door, upper sensor goes out again
+        if (!isDoorOpen(fsm)) {
+            // Ready to really stop now
+            fsm->next = MotorStop;
+            return;
+        }
     }
+    if (isDirDown(fsm)) {
+        // Stop down after a certain period of time
+        if (fsm->motorRunningCount >= MOTOR_DOWN_SLOW_CNT) {
+            fsm->next = MotorStop;
+            return;
+        }
+    }
+
+    // Keep going
+    fsm->next = MotorSlow;
 }
 
 void state_MotorStop(Fsm * fsm) {
@@ -487,8 +511,14 @@ void state_ForceUp(Fsm * fsm) {
 
     /* Handle state */
     fsm->motorDir = Up;
-    if (fsm->motorSpeed < 100) {
-        fsm->motorSpeed++;
+    if (isLimitSwitch(fsm)) {
+        // We went too far
+        fsm->motorSpeed = 0;
+    } else {
+        // Ramp up
+        if (fsm->motorSpeed < 100) {
+            fsm->motorSpeed++;
+        }
     }
     D_MOTOR_Run(fsm->motorDir, fsm->motorSpeed);
 

@@ -6,22 +6,40 @@
 #define _XTAL_FREQ 1000000UL /* 1 MHz clock */
 #define DEBUG_MODE 0
 
+#define PRIu8 "hhu"
+#define PRId8 "hhd"
+#define PRIx8 "hhx"
+#define PRIu16 "hu"
+#define PRId16 "hd"
+#define PRIx16 "hx"
+#define PRIu32 "lu"
+#define PRId32 "dl"
+#define PRIx32 "x"
+#define PRIu64 "llu" // or possibly "lu"
+#define PRId64 "lld" // or possibly "ld"
+#define PRIx64 "llx" // or possibly "lx"
+
+
 /*******************************************************************************
  *                      PIN MAPPING 
  ******************************************************************************/
 
 /* This file contains all pin mapping of the board */
-#define MOTOR_PWM       PORTCbits.RC2     // Pin for motor PWM
+#define MOTOR_PWM_Pin   PORTCbits.RC2     // Pin for motor PWM
 #define MOTOR_DIR_Pin   PORTCbits.RC1     // Pin for motor direction
 #define MOTOR_DIR_Dir   TRISCbits.RC1     // Pin for motor direction
 
 // Switched and buttons
+/* Upper magnetic reed sensor */
 #define U_SENSOR_Pin    PORTBbits.RB0
 #define U_SENSOR_Dir    TRISBbits.TRISB0
-#define B_SENSOR_Pin    PORTBbits.RB1
-#define B_SENSOR_Dir    TRISBbits.TRISB1
+/* Limit switch as a fail safe */
+#define L_SWITCH_Pin    PORTBbits.RB1
+#define L_SWITCH_Dir    TRISBbits.TRISB1
+/* Button up */
 #define U_BUTTON_Pin    PORTBbits.RB2
 #define U_BUTTON_Dir    TRISBbits.TRISB2
+/* Button down */
 #define D_BUTTON_Pin    PORTBbits.RB3
 #define D_BUTTON_Dir    TRISBbits.TRISB3
 
@@ -41,7 +59,7 @@
 /*******************************************************************************
  *                      ERROR CODES 
  ******************************************************************************/
-const uint8_t   ERROR_SENSORS_BOTH_CLOSED = 1;
+const uint8_t   ERROR_LIMIT_SWITCH_CLOSED = 1;
 const uint8_t   ERROR_SENSORS_UP_WHILE_NIGHT = 2;
 const uint8_t   ERROR_SENSORS_DOWN_WHILE_DAY = 4;
 const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
@@ -58,17 +76,23 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 
 /* When not in LOW_POWER (see LowPower switch) we don't go to sleep, 
  * but use this delay to fake a sleep time */
-#define  LOW_POWER_SLEEP_TIME_MS 10000
+#define LOW_POWER_SLEEP_TIME_MS 10000
 
-#define   THR_SLEEP_COUNT   5   /* The total sleep time will be SLEEP_TIME_MS times this value, to allow shorter wakeup intervals for sanity checking */
-#define   THR_DN_COUNT      3   /* Hysteresis counter, depending on time between sleeps this makes how long day/night should be read before changing */
+#define SLEEP_COUNT   5   /* The total sleep time will be SLEEP_TIME_MS times this value, to allow shorter wakeup intervals for sanity checking */
+#define DAY_COUNT     3   /* Hysteresis counter, depending on time between sleeps this makes how long day/night should be read before changing */
 
-#define   MAX_MOTOR_COUNT   2000/* The max count the motor should be running. */
-#define   MOTOR_FULL_SPEED  50  /* PWM percentage                             */
-#define   MOTOR_HALF_SPEED  20  /* PWM percentage                             */
-#define   CCW_DIRECTION     1   /* Counter clockwise direction                */
-#define   CW_DIRECTION      0   /* Clockwise direction                        */
+/*******************************************************************************
+ *                      MOTOR SETTINGS 
+ ******************************************************************************/
+#define CCW_DIRECTION       1   /* Counter clockwise direction                */
+#define CW_DIRECTION        0   /* Clockwise direction                        */
 
+#define MOTOR_FULL_SPEED    50  /* PWM percentage                             */
+#define MOTOR_HALF_SPEED    20  /* PWM percentage                             */
+
+#define MAX_MOTOR_COUNT     2000/* The max count the motor should be running. */
+#define MOTOR_DOWN_FULL_CNT 1450/* The max count the motor will run fast down.*/
+#define MOTOR_DOWN_SLOW_CNT 100 /* The max count the motor will run slow down.*/
 
 
 /*******************************************************************************

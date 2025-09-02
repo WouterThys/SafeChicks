@@ -45,13 +45,13 @@ void D_TMR0_Init(uint8_t mode) {
     }
     if (mode == TIMER_MODE_SLEEP) {
         /** 
-        * 1MHz clock, 16-bit, 1:8 pre-scale
+        * 1MHz clock, 16-bit, 1:256 pre-scale
         * FOSC/4 = 250kHz = 4us
-        * 65535 * 4E-6 * 8 = 2.09712s period
+        * 65535 * 4E-6 * 256 = 1:10min period
         */
     
         T0CONbits.T08BIT = 0;       /* Timer0 is configured as an 16-bit timer*/
-        T0CONbits.T0PS = 0b010;     /* 1:8   pre-scale value                  */
+        T0CONbits.T0PS = 0b111;     /* 1:256 pre-scale value                  */
     }
     
     INTCONbits.TMR0IF = 0;          /* Clear the interrupt flag               */

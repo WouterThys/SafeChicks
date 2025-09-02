@@ -65,13 +65,12 @@ void initialize(void)
     RCONbits.IPEN = 1;              /* Enable priority levels on interrupts   */
     INTCONbits.PEIE = 1;            /* Enable all peripheral interrupts       */
 
-    
     /* My own code setups */
     D_TMR0_Init(TIMER_MODE_WORK);
     D_MOTOR_Init();
     D_UART_Init();
     D_ADC_Init();
-    C_FSM_Init();
+    C_FSM_Init(goToSleep);
     
     /* Enable stuff */
     D_TMR0_Enable(true);
@@ -81,6 +80,8 @@ void initialize(void)
 }
 
 void goToSleep(void) {
+    
+    D_UART_Write("S\r\n");
     
     /**
      * We will need peripheral clock so go to RC_IDLE mode on SLEEP
@@ -97,6 +98,8 @@ void goToSleep(void) {
     /* Wake up again */
     D_TMR0_Init(TIMER_MODE_WORK);
     D_TMR0_Enable(true);
+    
+    D_UART_Write("W\r\n");
 }
 
 void main(void)
@@ -111,9 +114,6 @@ void main(void)
             runFSM = false;
             C_FSM_Tick();
         }
-        
-//        goToSleep();
-
     }
 }
 
@@ -129,18 +129,7 @@ void __interrupt(low_priority) _LowInterruptManager (void)
 
 void __interrupt(high_priority) _HighInterruptManager (void)
 {
-    /* Check if TMR1 interrupt is enabled and if the interrupt flag is set */
-    if(PIE1bits.TMR1IE== 1 && PIR1bits.TMR1IF == 1)
-    {
-//        if (test) {
-//            LATBbits.LATB5 = 1;
-//            test = false;
-//        } else {
-//            LATBbits.LATB5 = 0;
-//            test = true;
-//        }
-        PIR1bits.TMR1IF = 0; /* clear the interrupt flag */
-    }
+
 }
 
 /* THE END */
