@@ -18,15 +18,16 @@
 
 /* Enumeration to keep the FSM state */
 typedef enum {
-    Calculate,    /* Calculate depending on input                             */
-    Sleep,        /* Sleep for certain time before starting again             */
+    Calculate, /* Calculate depending on input                             */
+    Sleep, /* Sleep for certain time before starting again             */
 
-    MotorStart,   /* Start running the motor up or down                       */
+    MotorStart, /* Start running the motor up or down                       */
     MotorRunning, /* Run the motor, read sensors to see if motor should stop  */
-    MotorStop,    /* Stop running the motor                                   */
+    MotorSlow, /* Run the motor, slow, until sensor is out again           */
+    MotorStop, /* Stop running the motor                                   */
 
-    ForceUp,      /* Force the motor to run in Up direction. No checks!       */
-    ForceDown,    /* Force the motor to run in Down direction. No checks!     */
+    ForceUp, /* Force the motor to run in Up direction. No checks!       */
+    ForceDown, /* Force the motor to run in Down direction. No checks!     */
 } State;
 
 /* All FSM variables and data  */
@@ -65,6 +66,8 @@ typedef struct {
 #define isNight(fsm)        (!(isDay(fsm)))
 #define isDoorOpen(fsm)     (fsm->uSensorClosed)
 #define isDoorClosed(fsm)   (fsm->bSensorClosed)
+#define isDirUp(fsm)        (fsm->motorDir == Up)
+#define isDirDown(fsm)      (fsm->motorDir == Down)
 
 
 /**
@@ -128,10 +131,19 @@ static void state_MotorStart(Fsm * fsm);
 /**
  * State function for State::MotorCheck
  * Check if the motor should stop running depending on input variables.
- * When the motor should stop go to State::MotorStop
+ * When the sensor is first seen go to State::MotorSlow
  * @param fsm
  */
 static void state_MotorRunning(Fsm * fsm);
+
+/**
+ * State function for State::MotorSlow
+ * Run the motor slowly until the sensor goes out again. This means the door
+ * travelled long enough to be fully closed.
+ * The next state will be State::MotorStop
+ * @param fsm
+ */
+static void state_MotorSlow(Fsm * fsm);
 
 /**
  * State function for State::MotorStop
@@ -214,19 +226,19 @@ void C_FSM_Tick(void) {
  ******************************************************************************/
 
 void debug(Fsm * fsm) {
-    
+
     if (isDay(fsm)) {
         LED_BLUE_Pin = 1;
     } else {
         LED_BLUE_Pin = 0;
     }
-    
+
     if (fsm->error != 0) {
         LED_RED_Pin = 1;
     } else {
         LED_RED_Pin = 0;
     }
-    
+
     // TODO: advanced blinking patterns?
 
 #if DEBUG_MODE
@@ -234,7 +246,7 @@ void debug(Fsm * fsm) {
     if (fsm->epoch >= 100 && fsm->state <= Sleep) {
 
         fsm->epoch = 0;
-        
+
         char state = ((char) fsm->state) + 48;
 
         snprintf(debugBuffer, DEBUG_BUFFER_SIZE,
@@ -248,7 +260,7 @@ void debug(Fsm * fsm) {
 }
 
 void read_input(Fsm * fsm) {
-    
+
     fsm->lSensorValue = D_ADC_ReadOnce();
 
     fsm->uSensorClosed = U_SENSOR_Pin == 1;
@@ -287,14 +299,14 @@ void sanity_check(Fsm * fsm) {
 }
 
 void check_force(Fsm * fsm) {
-    
+
     if (fsm->uButtonPushed) {
         fsm->state = ForceUp;
     }
     if (fsm->dButtonPushed) {
         fsm->state = ForceDown;
     }
-    
+
 }
 
 void state_execute(Fsm * fsm) {
@@ -311,6 +323,9 @@ void state_execute(Fsm * fsm) {
         case MotorRunning:
             state_MotorRunning(fsm);
             break;
+        case MotorSlow:
+            state_MotorSlow(fsm);
+            break;
         case MotorStop:
             state_MotorStop(fsm);
             break;
@@ -322,10 +337,6 @@ void state_execute(Fsm * fsm) {
             break;
     }
 }
-
-
-
-
 
 void state_Calculate(Fsm * fsm) {
     bool changed = false;
@@ -406,7 +417,7 @@ void state_MotorStart(Fsm * fsm) {
     if (stopNow) {
         /* We have hit a switch, stop immediately */
         fsm->next = MotorStop;
-    } else if (fsm->motorSpeed > 100) {
+    } else if (fsm->motorSpeed > MOTOR_FULL_SPEED) {
         /* Ramped up, go to running state */
         fsm->next = MotorRunning;
     } else {
@@ -420,14 +431,39 @@ void state_MotorRunning(Fsm * fsm) {
     fsm->motorRunningCount++;
 
     /* Decide on next state */
-    if ((isDay(fsm) && isDoorOpen(fsm)) || // Opening door, upper sensor sees the door!
-            (isNight(fsm) && isDoorClosed(fsm)) || // Closing door, bottom sensor sees the door!
-            (fsm->motorRunningCount > MAX_MOTOR_COUNT)) // This is taking too long
-    {
+    if (fsm->motorRunningCount > MAX_MOTOR_COUNT) {
+        // Something went wrong. Stop
         fsm->next = MotorStop;
+    } else 
+        if ((isDirUp(fsm) && isDoorOpen(fsm)) || // Opening door, upper sensor sees the door!
+            (isDirDown(fsm) && isDoorClosed(fsm)) // Closing door, bottom sensor sees the door!
+            ) {
+        // Start slowing down and check when sensor goes out again
+        fsm->next = MotorSlow;
     } else {
         // Keep in the current state
         fsm->next = MotorRunning;
+    }
+}
+
+void state_MotorSlow(Fsm * fsm) {
+    /* Handle state */
+
+    // Slow down to half%
+    if (fsm->motorSpeed > MOTOR_HALF_SPEED) {
+        fsm->motorSpeed--;
+        D_MOTOR_Run(fsm->motorDir, fsm->motorSpeed);
+    }
+
+    /* Decide on next state */
+    if ((isDirUp(fsm) && !isDoorOpen(fsm)) || // Opening door, upper sensor goes out again
+            (isDirDown(fsm) && !isDoorClosed(fsm)) // Closing door, bottom sensor goes out again
+            ) {
+        // Ready to really stop now
+        fsm->next = MotorStop;
+    } else {
+        // Keep going
+        fsm->next = MotorSlow;
     }
 }
 
@@ -448,39 +484,39 @@ void state_MotorStop(Fsm * fsm) {
 }
 
 void state_ForceUp(Fsm * fsm) {
-    
+
     /* Handle state */
     fsm->motorDir = Up;
     if (fsm->motorSpeed < 100) {
         fsm->motorSpeed++;
     }
     D_MOTOR_Run(fsm->motorDir, fsm->motorSpeed);
-    
+
     /* Decide on next state */
     if (fsm->uButtonPushed) {
         fsm->next = ForceUp;
     } else {
         fsm->next = MotorStop;
     }
-    
+
 }
 
 void state_ForceDown(Fsm * fsm) {
     /* Handle state */
-    
+
     fsm->motorDir = Down;
     if (fsm->motorSpeed < 100) {
         fsm->motorSpeed++;
     }
     D_MOTOR_Run(fsm->motorDir, fsm->motorSpeed);
-    
+
     /* Decide on next state */
     if (fsm->dButtonPushed) {
         fsm->next = ForceDown;
     } else {
         fsm->next = MotorStop;
     }
-    
+
 }
 
 

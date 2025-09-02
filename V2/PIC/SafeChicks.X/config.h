@@ -63,10 +63,11 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 #define   THR_SLEEP_COUNT   5   /* The total sleep time will be SLEEP_TIME_MS times this value, to allow shorter wakeup intervals for sanity checking */
 #define   THR_DN_COUNT      3   /* Hysteresis counter, depending on time between sleeps this makes how long day/night should be read before changing */
 
-#define   MAX_MOTOR_COUNT   1000/* The max count the motor should be running. */
-#define   MAX_MOTOR_SPEED   100 /* PWM percentage                             */
+#define   MAX_MOTOR_COUNT   2000/* The max count the motor should be running. */
+#define   MOTOR_FULL_SPEED  50  /* PWM percentage                             */
+#define   MOTOR_HALF_SPEED  20  /* PWM percentage                             */
 #define   CCW_DIRECTION     1   /* Counter clockwise direction                */
-#define   CW_DIRECTION      0   /* Clockwise direction                */
+#define   CW_DIRECTION      0   /* Clockwise direction                        */
 
 
 
