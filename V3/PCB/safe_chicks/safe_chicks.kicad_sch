@@ -6203,7 +6203,7 @@
 		(uuid "1bd890ae-958b-4165-98a5-9fed2566f05d")
 	)
 	(label "MD-BTN"
-		(at 39.37 76.2 180)
+		(at 39.37 71.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6243,7 +6243,7 @@
 		(uuid "32a88470-6e9f-4dbd-b081-d6bf2aff73bd")
 	)
 	(label "U-SW"
-		(at 39.37 68.58 180)
+		(at 39.37 73.66 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6463,7 +6463,7 @@
 		(uuid "b8729cc9-1291-462c-9330-86a855142224")
 	)
 	(label "MU-BTN"
-		(at 39.37 73.66 180)
+		(at 39.37 68.58 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6593,7 +6593,7 @@
 		(uuid "f24411fa-7564-44ac-b07c-1fe41638393a")
 	)
 	(label "B-SW"
-		(at 39.37 71.12 180)
+		(at 39.37 76.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
