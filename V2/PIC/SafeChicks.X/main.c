@@ -41,6 +41,11 @@ static void goToSleep(void);
 bool test = false;
 volatile bool runFSM = false;
 
+#if DEBUG_MODE
+#define DEBUG_BUFFER_SIZE 100
+char debugBuffer[DEBUG_BUFFER_SIZE];
+#endif
+
 /*******************************************************************************
  *                      Function implementation 
  ******************************************************************************/
@@ -85,7 +90,11 @@ void initialize(void) {
 
 void goToSleep(void) {
 
-    D_UART_Write("S\r\n");
+#if DEBUG_MODE
+    /* Debug FSM state */
+    C_FSM_ToString(debugBuffer, DEBUG_BUFFER_SIZE);
+    D_UART_Write(debugBuffer);
+#endif
 
     /**
      * We will need peripheral clock so go to RC_IDLE mode on SLEEP
@@ -103,10 +112,9 @@ void goToSleep(void) {
     D_TMR0_Init(TIMER_MODE_WORK);
     D_TMR0_Enable(true);
 
-    D_UART_Write("W\r\n");
 }
 
-void main(void) {
+int main(void) {
     
     __delay_ms(100);
     initialize();
@@ -118,6 +126,8 @@ void main(void) {
             C_FSM_Tick();
         }
     }
+
+    return 0;
 }
 
 void __interrupt(low_priority) _LowInterruptManager(void) {

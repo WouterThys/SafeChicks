@@ -4,7 +4,7 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 
 #define _XTAL_FREQ 1000000UL /* 1 MHz clock */
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 
 #define PRIu8 "hhu"
 #define PRId8 "hhd"
@@ -73,10 +73,6 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 /* Threshold used to switch from day->night (sensor is max 1023) */
 #define DAY_THRESHOLD     200
 #define NIGHT_THRESHOLD   200
-
-/* When not in LOW_POWER (see LowPower switch) we don't go to sleep, 
- * but use this delay to fake a sleep time */
-#define LOW_POWER_SLEEP_TIME_MS 10000
 
 #define SLEEP_COUNT   5   /* The total sleep time will be SLEEP_TIME_MS times this value, to allow shorter wakeup intervals for sanity checking */
 #define DAY_COUNT     3   /* Hysteresis counter, depending on time between sleeps this makes how long day/night should be read before changing */

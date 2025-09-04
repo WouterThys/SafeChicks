@@ -51,7 +51,7 @@ void D_TMR0_Init(uint8_t mode) {
         */
     
         T0CONbits.T08BIT = 0;       /* Timer0 is configured as an 16-bit timer*/
-        T0CONbits.T0PS = 0b111;     /* 1:256 pre-scale value                  */
+        T0CONbits.T0PS = 0b100;     /* 1:256 pre-scale value                  */
     }
     
     INTCONbits.TMR0IF = 0;          /* Clear the interrupt flag               */

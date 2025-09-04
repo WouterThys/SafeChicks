@@ -1,8 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdint.h>
 #include <xc.h>
-#include <string.h>
 
 #include "../config.h"
 #include "UART_Driver.h"
