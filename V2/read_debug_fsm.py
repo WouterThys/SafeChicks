@@ -25,43 +25,94 @@ ERROR_FLAGS = {
     8: "MOTOR_RUN_TOO_LONG",
 }
 
+class Config:
+    dayThreshold = 200
+    nightThreshold = 200
+    sleepCount = 5
+    dayCount = 3
+    motorFullSpeed = 0
+    motorHalfSpeed = 0
+    maxMotorCount = 0
+    motorDownFullCnt = 0
+    motorDownSlowCnt = 0
+
 console = Console()
+config = Config()
 
 def decode_errors(error_val: int):
     """Return list of active error names from bitfield"""
     errors = [name for bit, name in ERROR_FLAGS.items() if error_val & bit]
     return errors if errors else ["None"]
 
+def parse_state(line, conf: Config):
+    parts = line.strip().split(",")
+    if len(parts) != 9:
+        print(f"ERROR: Invalid packet length: {len(parts)}")
+        return None  # Invalid packet length
+
+    state = STATE_MAP.get(int(parts[0]), f"Unknown({parts[0]})")
+    day = bool(int(parts[1]))
+    dayCount = int(parts[2])
+    sleepCount = int(parts[3])
+    lSensor = int(parts[4])
+    bSensor = int(parts[5])
+    uSensor = bool(int(parts[6]))
+    lSwitch = bool(int(parts[7]))
+    error_val = int(parts[8])
+
+    dayText = 'Day' if day else 'Night'
+    if dayCount > 0 and dayCount < conf.dayCount:
+        dayText += "*"
+
+    sleepText = "." * conf.sleepCount
+    for i in range(0, sleepCount):
+        sleepText = sleepText[:i] + "*" + sleepText[i + 1:] 
+
+    return {
+        "State": state,
+        "Day/Night": dayText,
+        "DayCount": f"{dayCount}/{conf.dayCount}",
+        "Sleeping": sleepText,
+        "lSensor": f"{lSensor}/{conf.dayThreshold}",
+        "bSensor": bSensor,
+        "uSensor": uSensor,
+        "lSwitch": lSwitch,
+        "Error Value": error_val,
+        "Error Flags": ", ".join(decode_errors(error_val)),
+    }
+
+
+def parse_config(line):
+    conf = Config()
+
+    parts = line.replace("C:", "").strip().split(",")
+    if len(parts) != 9:
+        print(f"ERROR: Invalid config length: {len(parts)}")
+        return conf  # Invalid packet length
+    
+    conf.dayThreshold = int(parts[0])
+    conf.nightThreshold = int(parts[1])
+    conf.sleepCount = int(parts[2])
+    conf.dayCount = int(parts[3])
+    conf.motorFullSpeed = int(parts[4])
+    conf.motorHalfSpeed = int(parts[5])
+    conf.maxMotorCount = int(parts[6])
+    conf.motorDownFullCnt = int(parts[7])
+    conf.motorDownSlowCnt = int(parts[8])
+
+    return conf
+    
+
 def parse_line(line):
     """Parse CSV line into structured dict"""
     try:
-        parts = line.strip().split(",")
-        if len(parts) != 9:
-            print(f"ERROR: Invalid packet length: {len(parts)}")
-            return None  # Invalid packet length
 
-        state = STATE_MAP.get(int(parts[0]), f"Unknown({parts[0]})")
-        day = bool(int(parts[1]))
-        dayCount = int(parts[2])
-        sleepCount = int(parts[3])
-        lSensor = int(parts[4])
-        bSensor = int(parts[5])
-        uSensor = bool(int(parts[6]))
-        lSwitch = bool(int(parts[7]))
-        error_val = int(parts[8])
+        if line.startswith("C:"):
+            global config 
+            config = parse_config(line)
+        else:
+            return parse_state(line, config)
 
-        return {
-            "State": state,
-            "IsDay": day,
-            "DayCount": f"{dayCount}/3",
-            "SleepCount": f"{sleepCount}/5",
-            "lSensor": lSensor,
-            "bSensor": bSensor,
-            "uSensor": uSensor,
-            "lSwitch": lSwitch,
-            "Error Value": error_val,
-            "Error Flags": ", ".join(decode_errors(error_val)),
-        }
     except Exception as ex:
         print(f"ERROR: Exception while parsing '{line}': {ex}")
         return None

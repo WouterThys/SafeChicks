@@ -10,6 +10,7 @@
         "mplab-core-da"
     ],
     "files.associations": {
-        "config.h": "c"
+        "config.h": "c",
+        "fsm_controller.h": "c"
     }
 }
