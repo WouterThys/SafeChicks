@@ -73,10 +73,15 @@ void initialize(void) {
   PORTC = 0x00;
 
   /* Interrupt setup */
-  INTCON2bits.INTEDG2 = 1; /* Interrupt on rising edge               */
-  INTCON3bits.INT2IP = 0;  /* Low priority                           */
-  INTCON3bits.INT2IF = 0;  /* Clear flag                             */
-  INTCON3bits.INT2IE = 1;  /* Enables the INT2 external interrupt    */
+  INTCON2bits.INTEDG0 = 1; /* Interrupt on rising edge               */
+  //INTCONbits.INT0IP = 0;  /* Low priority                           */
+  INTCONbits.INT0IF = 0;  /* Clear flag                             */
+  INTCONbits.INT0IE = 1;  /* Enables the INT0 external interrupt    */
+  
+  INTCON2bits.INTEDG1 = 1; /* Interrupt on rising edge               */
+  INTCON3bits.INT1IP = 1;  /* Low priority                           */
+  INTCON3bits.INT1IF = 0;  /* Clear flag                             */
+  INTCON3bits.INT1IE = 1;  /* Enables the INT0 external interrupt    */
 
   RCONbits.IPEN = 1;   /* Enable priority levels on interrupts   */
   INTCONbits.PEIE = 1; /* Enable all peripheral interrupts       */
@@ -172,13 +177,22 @@ void __interrupt(low_priority) _LowInterruptManager(void) {
     runFSM = true;
     INTCONbits.TMR0IF = 0; /* clear the TMR0 interrupt flag */
   }
-  /* Check if INT2 interrupt is enabled and if the interrupt flag is set */
-  if (INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1) {
-    runFSM = true;
-    INTCON3bits.INT2IF = 0; /* clear the INT2 interrupt flag */
-  }
 }
 
-void __interrupt(high_priority) _HighInterruptManager(void) {}
+void __interrupt(high_priority) _HighInterruptManager(void) {
+
+  /* Check if INT0 interrupt is enabled and if the interrupt flag is set */
+  if (INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1) {
+    runFSM = true;
+    INTCONbits.INT0IF = 0; /* clear the INT2 interrupt flag */
+  }
+  
+   /* Check if INT1 interrupt is enabled and if the interrupt flag is set */
+  if (INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1) {
+    runFSM = true;
+    INTCON3bits.INT1IF = 0; /* clear the INT2 interrupt flag */
+  }
+
+}
 
 /* THE END */

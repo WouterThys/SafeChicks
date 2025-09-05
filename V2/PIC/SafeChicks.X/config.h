@@ -30,18 +30,15 @@
 #define MOTOR_DIR_Dir   TRISCbits.RC1     // Pin for motor direction
 
 // Switched and buttons
-/* Upper magnetic reed sensor */
-#define U_SENSOR_Pin    PORTBbits.RB0
-#define U_SENSOR_Dir    TRISBbits.TRISB0
-/* Limit switch as a fail safe */
-#define L_SWITCH_Pin    PORTBbits.RB1
-#define L_SWITCH_Dir    TRISBbits.TRISB1
 /* Button up */
-#define U_BUTTON_Pin    PORTBbits.RB2
-#define U_BUTTON_Dir    TRISBbits.TRISB2
+#define U_BUTTON_Pin    PORTBbits.RB0
+#define U_BUTTON_Dir    TRISBbits.TRISB0
 /* Button down */
-#define D_BUTTON_Pin    PORTBbits.RB3
-#define D_BUTTON_Dir    TRISBbits.TRISB3
+#define D_BUTTON_Pin    PORTBbits.RB1
+#define D_BUTTON_Dir    TRISBbits.TRISB1
+/* Limit switch as a fail safe */
+#define L_SWITCH_Pin    PORTBbits.RB3
+#define L_SWITCH_Dir    TRISBbits.TRISB3
 
 // LEDs
 #define LED_BLUE_Pin    PORTBbits.RB4
@@ -80,15 +77,15 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 /*******************************************************************************
  *                      MOTOR SETTINGS 
  ******************************************************************************/
-#define CCW_DIRECTION       1   /* Counter clockwise direction                */
-#define CW_DIRECTION        0   /* Clockwise direction                        */
+#define CCW_DIRECTION       0   /* Counter clockwise direction                */
+#define CW_DIRECTION        1   /* Clockwise direction                        */
 
 #define MOTOR_FULL_SPEED    50  /* PWM percentage                             */
 #define MOTOR_HALF_SPEED    20  /* PWM percentage                             */
 
-#define MAX_MOTOR_COUNT     2000/* The max count the motor should be running. */
-#define MOTOR_DOWN_FULL_CNT 1450/* The max count the motor will run fast down.*/
-#define MOTOR_DOWN_SLOW_CNT 100 /* The max count the motor will run slow down.*/
+#define MOTOR_DOWN_FULL_CNT 2200/* The max count the motor will run fast.     */
+#define MOTOR_DOWN_SLOW_CNT 500 /* The max count the motor will run slow.     */
+#define MAX_MOTOR_COUNT     (3*(MOTOR_DOWN_FULL_CNT + MOTOR_DOWN_SLOW_CNT))
 
 
 /*******************************************************************************

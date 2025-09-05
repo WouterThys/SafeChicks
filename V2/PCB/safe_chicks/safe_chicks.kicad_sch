@@ -2833,6 +2833,18 @@
 		)
 		(uuid "802dae61-5981-4b2b-9d1b-ac2d535aea8e")
 	)
+	(text "Does not match\nreality any more\nRB0=BTN UP\nRB1=BTN DWN\nRB2=x\nRB3=Limit switch"
+		(exclude_from_sim no)
+		(at 30.226 72.644 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(color 255 0 0 1)
+			)
+			(justify right)
+		)
+		(uuid "84ed67be-d446-4c95-a28d-b034d2a0d0b4")
+	)
 	(text "Photo diode\nSensor"
 		(exclude_from_sim no)
 		(at 240.792 78.232 0)
