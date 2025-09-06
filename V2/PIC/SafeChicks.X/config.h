@@ -4,7 +4,7 @@
 #include <xc.h> // include processor files - each processor file is guarded.  
 
 #define _XTAL_FREQ 1000000UL /* 1 MHz clock */
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 #define PRIu8 "hhu"
 #define PRId8 "hhd"
@@ -80,11 +80,11 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 #define CCW_DIRECTION       0   /* Counter clockwise direction                */
 #define CW_DIRECTION        1   /* Clockwise direction                        */
 
-#define MOTOR_FULL_SPEED    50  /* PWM percentage                             */
-#define MOTOR_HALF_SPEED    20  /* PWM percentage                             */
+#define MOTOR_FULL_SPEED    70  /* PWM percentage                             */
+#define MOTOR_HALF_SPEED    35  /* PWM percentage                             */
 
-#define MOTOR_DOWN_FULL_CNT 2200/* The max count the motor will run fast.     */
-#define MOTOR_DOWN_SLOW_CNT 500 /* The max count the motor will run slow.     */
+#define MOTOR_DOWN_FULL_CNT 1450/* The max count the motor will run fast.     */
+#define MOTOR_DOWN_SLOW_CNT 450 /* The max count the motor will run slow.     */
 #define MAX_MOTOR_COUNT     (3*(MOTOR_DOWN_FULL_CNT + MOTOR_DOWN_SLOW_CNT))
 
 

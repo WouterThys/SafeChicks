@@ -61,7 +61,7 @@ typedef struct {
 #define isNight(fsm) (!(isDay(fsm)))
 
 #define isLimitSwitch(fsm) (fsm->lSwitchClosed)
-#define isRunningTooLong(fsm) (fsm->motorRunningCount > MAX_MOTOR_COUNT)
+#define isRunningTooLong(fsm) false /*(fsm->motorRunningCount > MAX_MOTOR_COUNT)*/
 
 #define isDirUp(fsm) (fsm->motorDir == Up)
 #define isDirDown(fsm) (fsm->motorDir == Down)
@@ -277,7 +277,7 @@ void check_force(Fsm *fsm) {
       fsm->motorSpeed = MOTOR_HALF_SPEED;
       fsm->motorDir = Down;
       D_MOTOR_Run(fsm->motorDir, fsm->motorSpeed);
-	  __delay_ms(500);
+	  __delay_ms(1000);
       // Go to stop state
       fsm->state = MotorStop;
       fsm->next = MotorStop;
@@ -357,7 +357,7 @@ void state_Calculate(Fsm *fsm) {
 
   /* Decide on next state */
   if (changed) {
-	fsm->motorSpeed = 0;
+	  fsm->motorSpeed = 0;
     fsm->motorRunningCount = 0;
     fsm->next = MotorStart;
   } else {
@@ -469,7 +469,7 @@ void state_MotorStop(Fsm *fsm) {
     fsm->motorSpeed--;
     D_MOTOR_Run(fsm->motorDir, fsm->motorSpeed);
   } else {
-	fsm->motorSpeed = 0;
+	  fsm->motorSpeed = 0;
   	fsm->motorRunningCount = 0;
   }
 

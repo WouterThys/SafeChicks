@@ -1,3 +1,4 @@
+#include <builtins.h>
 #include <stdbool.h>
 #include <xc.h>
 
@@ -127,7 +128,6 @@ void goToSleep(void) {
 
   D_TMR0_Init(TIMER_MODE_SLEEP);
   D_TMR0_Enable(true);
-
   /* Lets go! */
   SLEEP();
 
@@ -159,7 +159,7 @@ int main(void) {
 
   __delay_ms(100);
   initialize();
-  __delay_ms(100);
+  __delay_ms(101);
 
   while (1) {
     if (runFSM) {
