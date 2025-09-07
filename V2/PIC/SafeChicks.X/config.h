@@ -83,8 +83,8 @@ const uint8_t   ERROR_MOTOR_RUN_TOO_LONG = 8;
 #define MOTOR_FULL_SPEED    70  /* PWM percentage                             */
 #define MOTOR_HALF_SPEED    35  /* PWM percentage                             */
 
-#define MOTOR_DOWN_FULL_CNT 1450/* The max count the motor will run fast.     */
-#define MOTOR_DOWN_SLOW_CNT 450 /* The max count the motor will run slow.     */
+#define MOTOR_DOWN_FULL_CNT 1300/* The max count the motor will run fast.     */
+#define MOTOR_DOWN_SLOW_CNT 400 /* The max count the motor will run slow.     */
 #define MAX_MOTOR_COUNT     (3*(MOTOR_DOWN_FULL_CNT + MOTOR_DOWN_SLOW_CNT))
 
 

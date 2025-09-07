@@ -193,7 +193,7 @@ void C_FSM_Init(SleepHandler handler) {
   fsm.sleepCount = 0;
   fsm.motorSpeed = 0;
   fsm.motorRunningCount = 0;
-  fsm.lSensorValue = 0;
+  fsm.lSensorValue = 200;
   fsm.lSwitchClosed = false;
   fsm.uButtonPushed = false;
   fsm.dButtonPushed = false;

@@ -159,7 +159,7 @@ int main(void) {
 
   __delay_ms(100);
   initialize();
-  __delay_ms(101);
+  __delay_ms(100);
 
   while (1) {
     if (runFSM) {
