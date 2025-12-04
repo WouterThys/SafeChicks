@@ -5,6 +5,7 @@
 
 #include "../Drivers/ADC_Driver.h"
 #include "../Drivers/MOTOR_Driver.h"
+#include "../Drivers/UART_Driver.h"
 #include "../config.h"
 
 #include <stdio.h>
@@ -61,7 +62,7 @@ typedef struct {
 #define isNight(fsm) (!(isDay(fsm)))
 
 #define isLimitSwitch(fsm) (fsm->lSwitchClosed)
-#define isRunningTooLong(fsm) false /*(fsm->motorRunningCount > MAX_MOTOR_COUNT)*/
+#define isRunningTooLong(fsm) (fsm->motorRunningCount > MAX_MOTOR_COUNT)
 
 #define isDirUp(fsm) (fsm->motorDir == Up)
 #define isDirDown(fsm) (fsm->motorDir == Down)
@@ -441,6 +442,12 @@ void state_MotorSlow(Fsm *fsm) {
   }
 
   /* Decide on next state */
+
+  if (fsm->dButtonPushed) {
+    char data[20] = { 0 };
+    snprintf(data, 20, "DBG: %d\n", (int)fsm->motorRunningCount);
+    D_UART_Write(data);
+  }
 
   // Check the limit switch
   if (isLimitSwitch(fsm)) {
