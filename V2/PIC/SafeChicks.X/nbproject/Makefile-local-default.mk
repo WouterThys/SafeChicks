@@ -21,17 +21,17 @@ PATH:=D:/Microchip/MPLABX/v6.25/mplab_platform/platform/../mplab_ide/modules/../
 # Path to java used to run MPLAB X when this makefile was created
 MP_JAVA_PATH="D:\Microchip\MPLABX\v6.25\sys\java\zulu8.80.0.17-ca-fx-jre8.0.422-win_x64/bin/"
 OS_CURRENT="$(shell uname -s)"
-MP_CC="D:\Microchip\xc8\v3.00\bin\xc8-cc.exe"
+MP_CC="C:\Program Files\Microchip\xc8\v3.00\bin\xc8-cc.exe"
 # MP_CPPC is not defined
 # MP_BC is not defined
-MP_AS="D:\Microchip\xc8\v3.00\bin\xc8-cc.exe"
-MP_LD="D:\Microchip\xc8\v3.00\bin\xc8-cc.exe"
-MP_AR="D:\Microchip\xc8\v3.00\bin\xc8-ar.exe"
+MP_AS="C:\Program Files\Microchip\xc8\v3.00\bin\xc8-cc.exe"
+MP_LD="C:\Program Files\Microchip\xc8\v3.00\bin\xc8-cc.exe"
+MP_AR="C:\Program Files\Microchip\xc8\v3.00\bin\xc8-ar.exe"
 DEP_GEN=${MP_JAVA_PATH}java -jar "D:/Microchip/MPLABX/v6.25/mplab_platform/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar"
-MP_CC_DIR="D:\Microchip\xc8\v3.00\bin"
+MP_CC_DIR="C:\Program Files\Microchip\xc8\v3.00\bin"
 # MP_CPPC_DIR is not defined
 # MP_BC_DIR is not defined
-MP_AS_DIR="D:\Microchip\xc8\v3.00\bin"
-MP_LD_DIR="D:\Microchip\xc8\v3.00\bin"
-MP_AR_DIR="D:\Microchip\xc8\v3.00\bin"
+MP_AS_DIR="C:\Program Files\Microchip\xc8\v3.00\bin"
+MP_LD_DIR="C:\Program Files\Microchip\xc8\v3.00\bin"
+MP_AR_DIR="C:\Program Files\Microchip\xc8\v3.00\bin"
 DFP_DIR=D:/Microchip/MPLABX/v6.25/packs/Microchip/PIC18Fxxxx_DFP/1.7.171

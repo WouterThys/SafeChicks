@@ -283,22 +283,7 @@ void check_force(Fsm *fsm) {
     // Buttons
     if (fsm->uButtonPushed) {
       // Wait a little and check again, if both buttons pushed do a fake night
-      __delay_ms(500);
-      read_input(fsm);
-      if (fsm->dButtonPushed) 
-      {
-        // Fake night
-        fsm->day = false;
-        fsm->dayCount = 0;
-        fsm->motorDir = Down;
-        fsm->motorSpeed = 0;
-        fsm->motorRunningCount = 0;
-        fsm->next = MotorStart;
-      }
-      else 
-      {
-        fsm->state = ForceUp;
-      }
+      fsm->state = ForceUp;
     }
     if (fsm->dButtonPushed) {
       fsm->state = ForceDown;
