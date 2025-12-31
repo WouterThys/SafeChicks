@@ -5,7 +5,6 @@
 
 #include "../Drivers/ADC_Driver.h"
 #include "../Drivers/MOTOR_Driver.h"
-#include "../Drivers/UART_Driver.h"
 #include "../config.h"
 
 #include <stdio.h>
@@ -272,21 +271,34 @@ void sanity_check(Fsm *fsm) {
 void check_force(Fsm *fsm) {
 
   if (isLimitSwitch(fsm)) {
-    // Stop unless moving down
-    //if (isDirUp(fsm) && fsm->motorSpeed > 0) {
       // Reverse the direction and move slowly down again
       fsm->motorSpeed = MOTOR_HALF_SPEED;
       fsm->motorDir = Down;
       D_MOTOR_Run(fsm->motorDir, fsm->motorSpeed);
-	  __delay_ms(1000);
+	    __delay_ms(1000);
       // Go to stop state
       fsm->state = MotorStop;
       fsm->next = MotorStop;
-    //}
   } else {
     // Buttons
     if (fsm->uButtonPushed) {
-      fsm->state = ForceUp;
+      // Wait a little and check again, if both buttons pushed do a fake night
+      __delay_ms(500);
+      read_input(fsm);
+      if (fsm->dButtonPushed) 
+      {
+        // Fake night
+        fsm->day = false;
+        fsm->dayCount = 0;
+        fsm->motorDir = Down;
+        fsm->motorSpeed = 0;
+        fsm->motorRunningCount = 0;
+        fsm->next = MotorStart;
+      }
+      else 
+      {
+        fsm->state = ForceUp;
+      }
     }
     if (fsm->dButtonPushed) {
       fsm->state = ForceDown;
