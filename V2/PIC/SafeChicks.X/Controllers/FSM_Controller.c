@@ -291,12 +291,6 @@ void check_force(Fsm *fsm) {
     if (fsm->dButtonPushed) {
       fsm->state = ForceDown;
     }
-
-  //     if (fsm->dButtonPushed) {
-  //   char data[20] = { 0 };
-  //   snprintf(data, 20, "DBG: %d\n", (int)fsm->motorRunningCount);
-  //   D_UART_Write(data);
-  // }
   }
 }
 

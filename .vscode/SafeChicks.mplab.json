@@ -1,6 +1,6 @@
 {
     "importedFrom": "V2\\PIC\\SafeChicks.X",
-    "version": "1.7",
+    "version": "1.8",
     "configurations": [
         {
             "name": "default",

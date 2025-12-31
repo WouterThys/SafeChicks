@@ -12,5 +12,6 @@
     "files.associations": {
         "config.h": "c",
         "fsm_controller.h": "c"
-    }
+    },
+    "C_Cpp.intelliSenseEngine": "disabled"
 }
