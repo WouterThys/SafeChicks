@@ -99,6 +99,8 @@ void initialize(void) {
   D_UART_Enable(true);
   INTCONbits.GIEH = 1; /* Enables all high-priority interrupts   */
   INTCONbits.GIEL = 1; /* Enable low interrupts                  */
+
+  D_UART_Write("ptart\n");
 }
 
 void goToSleep(void) {

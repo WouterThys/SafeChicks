@@ -291,6 +291,12 @@ void check_force(Fsm *fsm) {
     if (fsm->dButtonPushed) {
       fsm->state = ForceDown;
     }
+
+  //     if (fsm->dButtonPushed) {
+  //   char data[20] = { 0 };
+  //   snprintf(data, 20, "DBG: %d\n", (int)fsm->motorRunningCount);
+  //   D_UART_Write(data);
+  // }
   }
 }
 
@@ -442,12 +448,6 @@ void state_MotorSlow(Fsm *fsm) {
   }
 
   /* Decide on next state */
-
-  if (fsm->dButtonPushed) {
-    char data[20] = { 0 };
-    snprintf(data, 20, "DBG: %d\n", (int)fsm->motorRunningCount);
-    D_UART_Write(data);
-  }
 
   // Check the limit switch
   if (isLimitSwitch(fsm)) {
